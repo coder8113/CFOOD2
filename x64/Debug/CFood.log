@@ -1,2 +1,6 @@
-﻿  Recipe.cpp
+﻿  CFood.cpp
+  Parser.cpp
+  Recipe.cpp
+  file.cpp
+  Generating Code...
   CFood.vcxproj -> C:\Users\Robert\source\repos\CFood\x64\Debug\CFood.exe

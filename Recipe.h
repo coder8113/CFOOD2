@@ -39,8 +39,8 @@ public:
 
 	Recipe();
 
-	Measurement_e stringToMeasurement(std::string str);
-	std::string measurementToString(Measurement_e measurement);
+	static Measurement_e stringToMeasurement(std::string str);
+	static std::string measurementToString(Measurement_e measurement);
 
 
 	void Display();

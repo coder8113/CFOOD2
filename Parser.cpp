@@ -157,53 +157,7 @@ void Parser::parseIngredient()
 			c = std::tolower(static_cast<unsigned char>(c));
 		}
 		// USE STDMAP INSTEAD
-		Recipe::Measurement_e internalUnit = Recipe::other;
-		if (unit == "teaspoon" || unit == "tsp")
-		{
-			internalUnit = Recipe::teaspoon;
-		}
-
-		if (unit == "tablespoon" || unit == "tbsp" || unit == "t")
-		{
-			internalUnit = Recipe::tablespoon;
-		}
-
-		if (unit == "fluid ounce" || unit == "fl oz" || unit == "floz")
-		{
-			internalUnit = Recipe::fluid_ounce;
-		}
-		if (unit == "cup" || unit == "c")
-		{
-			internalUnit = Recipe::cup;
-		}
-		if (unit == "pint" || unit == "pt")
-		{
-			internalUnit = Recipe::pint;
-		}
-		if (unit == "quart" || unit == "qt")
-		{
-			internalUnit = Recipe::quarts;
-		}
-		if (unit == "gallon" || unit == "gal")
-		{
-			internalUnit = Recipe::gallon;
-		}
-		if (unit == "ounce" || unit == "oz")
-		{
-			internalUnit = Recipe::ounce;
-		}
-		if (unit == "pound" || unit == "lb")
-		{
-			internalUnit = Recipe::pound;
-		}
-		if (unit == "gram" || unit == "g")
-		{
-			internalUnit = Recipe::gram;
-		}
-		if (unit == "kilogram" || unit == "kg")
-		{
-			internalUnit = Recipe::kilogram;
-		}
+		Recipe::Measurement_e internalUnit = Recipe::stringToMeasurement(unit);
 
 		if (internalUnit != Recipe::other) {
 			printf("<INGREDIENT> <val> %d, <unit> %s, <desc> %s\n", value, unit.c_str(), ingredient.c_str());

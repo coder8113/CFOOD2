@@ -43,7 +43,7 @@ void Recipe::DisplayIngredient(struct Ingredient ingredient)
 	}
 	else 
 	{
-		printf("\t%d %d %s \n", ingredient.value, ingredient.measurement, ingredient.ingredient.c_str());
+		printf("\t%d %s %s \n", ingredient.value, measurementToString(ingredient.measurement).c_str(), ingredient.ingredient.c_str());
 	}
 }
 
@@ -76,7 +76,32 @@ Recipe::Measurement_e Recipe::stringToMeasurement(std::string str)
 {
 	static const std::unordered_map<std::string, Measurement_e> measurementMap = {
 		{"teaspoon", teaspoon},
+		{"tsp", teaspoon},
+		{"tablespoon", tablespoon},
+		{"tbsp", tablespoon},
+		{"t", tablespoon},
+		{"fl oz", fluid_ounce},
+		{"fluid oz", fluid_ounce},
+		{"fluid ounce", fluid_ounce},
+		{"cup", cup},
+		{"cups", cup},
+		{"cup(s)", cup},
+		{"c", cup},
+		{"pint", pint},
+		{"quart", quarts},
+		{"qt", quarts},
+		{"gallon", gallon},
+		{"gal", gallon},
+		{"ounce", ounce},
+		{"oz", ounce},
+		{"pound", pound},
+		{"lb", pound},
+		{"gram", gram},
+		{"g", gram},
+		{"kilogram", kilogram},
+		{"kg", kilogram}
 	};
+
 
 	auto it = measurementMap.find(str);
 	if (it != measurementMap.end()) {
@@ -90,8 +115,23 @@ Recipe::Measurement_e Recipe::stringToMeasurement(std::string str)
 std::string Recipe::measurementToString(Recipe::Measurement_e measurement)
 {
 	static const std::unordered_map<Recipe::Measurement_e, std::string> measurementMap = {
-		{Recipe::teaspoon, "teaspon"},
+		{teaspoon, "tsp"},
+		{tablespoon, "tbsp"},
+		{fluid_ounce, "fl oz"},
+		{cup, "cup"},
+		{pint, "pt"},
+		{quarts, "qt"},
+		{gallon, "gal"},
+		{ounce, "oz"},
+		{pound, "lb"},
+		{gram, "g"},
+		{kilogram, "kg"},
+		{other, "other"} // Default or unspecified measurement
 	};
-	std::string a = "hi";
-	return a;
+
+	auto it = measurementMap.find(measurement);
+	if (it != measurementMap.end()) {
+		return it->second;
+	}
+	return "other"; // Return a default or error value
 }
