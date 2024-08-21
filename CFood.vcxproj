@@ -129,18 +129,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CFood.cpp" />
-    <ClCompile Include="file.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Recipe.cpp" />
+    <ClInclude Include="include\file.h" />
+    <ClInclude Include="include\Parser.h" />
+    <ClInclude Include="include\Recipe.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="file.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="Recipe.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="lecnotes.txt" />
+    <ClCompile Include="src\CFood.cpp" />
+    <ClCompile Include="src\file.cpp" />
+    <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\Recipe.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
