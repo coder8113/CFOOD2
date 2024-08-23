@@ -1,0 +1,52 @@
+# Visual Studio
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]eleases/
+[Rr]elease/
+x64/
+x86/
+ARM/
+AArch64/
+build/
+*.vcxproj*
+*.vcxproj.filters
+*.vcxproj.user
+
+# C++ specific
+*.obj
+*.pch
+*.pdb
+*.idb
+*.ipch
+*.exp
+*.lib
+*.suo
+*.tlh
+*.tli
+*.ncb
+*.sdf
+*.opensdf
+*.log
+*.suo
+*.user
+
+# Visual Studio Code settings
+.vscode/
+
+# Backup files
+*.bak
+*.swp
+*.tmp
+
+# Other
+*.log
+*.dmp
+*.DS_Store
+Thumbs.db
