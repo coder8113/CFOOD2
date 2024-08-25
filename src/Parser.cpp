@@ -1,11 +1,12 @@
 #include "./Parser.h"
 
-Parser::Parser(std::string data) {
+Parser::Parser(std::string data, std::string filename) {
 	m_Span.data = data;
 	m_Span.position = 0;
 	m_Span.span = 0;
 	m_State = INIT_MODE;
 	recipe = new Recipe();
+	recipe->setFilename(filename);
 }
 
 Recipe* Parser::getReceipe()
@@ -59,17 +60,17 @@ void Parser::parseHeading()
 		if (subheading == INGREDIENTS)
 		{
 			m_State = INGREDIENTS_MODE;
-			printf("<subheading> ingredients\n");
+			//printf("<subheading> ingredients\n");
 		}
 		if (subheading == INSTRUCTIONS)
 		{
 			m_State = INSTRUCTIONS_MODE;
-			printf("<subheading> instructions;\n");
+			//printf("<subheading> instructions;\n");
 		}
 		if (subheading == REMARKS)
 		{
 			m_State = REMARKS_MODE;
-			printf("<subheading> remarks\n");
+			//printf("<subheading> remarks\n");
 		}
 		return;
 
@@ -89,7 +90,7 @@ void Parser::parseHeading()
 		advance();
 	}
 	std::string title = pop();
-	printf("<title> %s\n", title.c_str());
+	//printf("<title> %s\n", title.c_str());
 	recipe->setTitle(title);
 
 }
@@ -158,7 +159,7 @@ void Parser::parseIngredient()
 		Recipe::Measurement_e internalUnit = Recipe::stringToMeasurement(unit);
 
 		if (internalUnit != Recipe::other) {
-			printf("<INGREDIENT> <val> %d, <unit> %s, <desc> %s\n", value, unit.c_str(), ingredient.c_str());
+			//printf("<INGREDIENT> <val> %d, <unit> %s, <desc> %s\n", value, unit.c_str(), ingredient.c_str());
 			recipe->addIngredient(value, internalUnit, ingredient);
 
 			return;
@@ -176,7 +177,7 @@ void Parser::parseIngredient()
 		advance();
 	}
 	std::string bulletPoint = pop();
-	printf("<ingredient> %s \n", bulletPoint.c_str());
+	//printf("<ingredient> %s \n", bulletPoint.c_str());
 	if (m_State == INGREDIENTS_MODE)
 	{
 		recipe->addIngredient(-1, Recipe::other, bulletPoint);
@@ -206,7 +207,7 @@ void Parser::parseList()
 	}
 	std::string line = pop();
 
-	printf("<list> %s %s\n", digit.c_str(), line.c_str());
+	//printf("<list> %s %s\n", digit.c_str(), line.c_str());
 	if (m_State == INSTRUCTIONS_MODE)
 	{
 		recipe->addInstruction(line);

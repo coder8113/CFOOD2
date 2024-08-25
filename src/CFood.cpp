@@ -9,10 +9,23 @@
 #include <vector>
 #include <string>
 
-#include <direct.h> // _getcwd
-#include <stdlib.h> // free, perror
-#include <stdio.h>  // printf
-#include <string.h> // strlen
+#include <direct.h>
+#include <stdlib.h> 
+#include <stdio.h> 
+#include <string.h> 
+
+#include <locale>
+#include <codecvt>
+
+namespace util
+{
+    std::string wide_to_narrow(const wchar_t* wideStr) {
+        std::wstring wstr(wideStr);
+
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        return converter.to_bytes(wstr);
+    }
+}
 
 int main()
 {
@@ -24,7 +37,7 @@ int main()
         perror("_getcwd error");
     else
     {
-        printf("%s \nLength: %zu\n", buffer, strlen(buffer));
+        //printf("%s \nLength: %zu\n", buffer, strlen(buffer));
         free(buffer);
     }
 
@@ -32,18 +45,16 @@ int main()
     std::vector<wchar_t*> fileTable;
     file::ListDirectoryContents(&fileTable, L"Recipes");
 
-    for (wchar_t* f : fileTable) {
-        wprintf(L"%s\n", f);
-    }
-
     std::string test = file::LoadFile(fileTable.at(0));
     
     //printf("%s\n", test.c_str());
 
-    Parser a = Parser(file::LoadFile(fileTable.at(0)));
+    Parser a = Parser(file::LoadFile(fileTable.at(0)), 
+        util::wide_to_narrow(fileTable.at(0)));
     a.Parse();
     Recipe* r = a.getReceipe();
-
+    r->Display();
     r->setTitle("TEST_SAVE");
     file::saveRecipeToFile(r);
+   
 }

@@ -3,9 +3,17 @@
 Recipe::Recipe() 
 {
 	title = "";
+	filename = "";
+	isSaved = true;
 	servings = 0;
 	remarks = "";
 
+}
+
+void Recipe::setFilename(std::string filename)
+{
+	this->filename = filename;
+	this->isSaved = false;
 }
 
 void Recipe::Display()
@@ -50,6 +58,7 @@ void Recipe::DisplayIngredient(struct Ingredient ingredient)
 void Recipe::setTitle(std::string title)
 {
 	this->title = title;
+	this->isSaved = false;
 }
 
 void Recipe::addIngredient(uint32_t value, Measurement_e measurement, std::string ingredientName)
@@ -70,6 +79,7 @@ void Recipe::addInstruction(std::string instruction)
 void Recipe::setRemarks(std::string remark)
 {
 	remarks = remark;
+	this->isSaved = false;
 }
 
 Recipe::Measurement_e Recipe::stringToMeasurement(std::string str)

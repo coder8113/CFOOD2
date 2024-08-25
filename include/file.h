@@ -13,6 +13,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <locale>
+#include <cstdio> 
 
 #include "Recipe.h"
 
@@ -22,6 +23,7 @@ public:
 	bool static ListDirectoryContents(std::vector<wchar_t*> *fileTable, const wchar_t *sDir);
 	std::string static LoadFile(const wchar_t* fileName);
 	bool static saveRecipeToFile(Recipe* recipe);
+	bool static deleteFile(std::string filename);
 	//Recipe parseRecipeFile(std::string recipeFile);
 
 

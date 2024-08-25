@@ -71,37 +71,50 @@ std::string file::LoadFile(const wchar_t* fileName)
     return oss.str(); // Convert the stringstream to a string
 }
 
+/*
+* Written with help by chatgpt.
+
+*/
 bool file::saveRecipeToFile(Recipe* recipe)
 {
     std::string textToWrite = recipe->toString();
 
-    std::stringstream ss;
-    ss << "Recipes/" << recipe->title << ".md";  // Format the filename
+    // this was because previously we took the title to set as filename.
+    //std::stringstream ss;
+    //ss << "Recipes/" << recipe->title << ".md";  // Format the filename
 
-    std::string filename = ss.str();
-    for (char& c : filename) {
-        if (c == ' ') {
-            c = '_';
-        }
-    }
+    //std::string filename = ss.str();
+    //for (char& c : filename) {
+    //    if (c == ' ') {
+    //        c = '_';
+    //    }
+    //}
 
-    std::ofstream outFile(filename);  // Open the file
+    std::ofstream outFile(recipe->filename);
 
-    // Check if the file was opened successfully
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return false; // Return with an error code
     }
 
-    // Write the string to the file
     outFile << textToWrite;
 
-    // Close the file
     outFile.close();
 
-    // Notify the user
-    std::cout << "String written to file successfully!" << std::endl;
     return true;
+}
+
+bool file::deleteFile(std::string filename)
+{
+
+    if (std::remove(filename.c_str()) == 0) {
+        return true;
+    }
+    else {
+        std::perror("Error deleting file"); 
+    }
+
+    return false;
 }
 /*
 

@@ -26,7 +26,7 @@ public:
 	enum state_e m_State;
 	Recipe* recipe;
 
-	Parser(std::string data);
+	Parser(std::string data, std::string filename);
 
 	void Parse();
 	Recipe* getReceipe();
