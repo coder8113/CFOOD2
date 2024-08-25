@@ -2,8 +2,9 @@
 //
 
 #include <iostream>
-#include "file.h"
+#include "./file.h"
 #include "./Parser.h"
+#include "./Recipe.h"
 
 #include <vector>
 #include <string>
@@ -41,4 +42,8 @@ int main()
 
     Parser a = Parser(file::LoadFile(fileTable.at(0)));
     a.Parse();
+    Recipe* r = a.getReceipe();
+
+    r->setTitle("TEST_SAVE");
+    file::saveRecipeToFile(r);
 }

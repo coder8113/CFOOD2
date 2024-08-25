@@ -24,7 +24,7 @@ public:
 
 	struct span_s m_Span;
 	enum state_e m_State;
-	Recipe recipe;
+	Recipe* recipe;
 
 	Parser(std::string data);
 

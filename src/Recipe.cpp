@@ -135,3 +135,51 @@ std::string Recipe::measurementToString(Recipe::Measurement_e measurement)
 	}
 	return "other"; // Return a default or error value
 }
+
+std::string Recipe::toString()
+{
+	std::string result = "";
+	
+	// title
+	result += "# ";
+	result += title;
+	result += "\n";
+
+	// ingredients
+	result += "## Ingredients\n";
+
+	for (Ingredient ingredient : ingredients)
+	{
+		result += "* ";
+		if (ingredient.measurement == other)
+		{
+			result += ingredient.ingredient;
+		}
+		else
+		{
+			result += std::to_string(ingredient.value);
+			result += measurementToString(ingredient.measurement);
+			result += " ";
+			result += ingredient.ingredient;
+		}
+		result += "\n";
+		
+	}
+
+	// instructions
+	result += "## Instructions\n";
+
+	int i = 1;
+	for (std::string instruction : instructions)
+	{
+		result += std::to_string(i);
+		result += ". ";
+		result += instruction;
+		result += "\n";
+		i++;
+	}
+
+	result += "## Remarks\n";
+	result += remarks;
+	return result;
+}

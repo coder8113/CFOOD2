@@ -21,6 +21,7 @@ class file
 public:
 	bool static ListDirectoryContents(std::vector<wchar_t*> *fileTable, const wchar_t *sDir);
 	std::string static LoadFile(const wchar_t* fileName);
+	bool static saveRecipeToFile(Recipe* recipe);
 	//Recipe parseRecipeFile(std::string recipeFile);
 
 

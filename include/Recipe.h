@@ -48,6 +48,7 @@ public:
 	void addIngredient(uint32_t value, Measurement_e measurement, std::string ingredientName);
 	void addInstruction(std::string instruction);
 	void setRemarks(std::string remark);
+	std::string toString();
 private:
 	void DisplayIngredient(struct Ingredient ingredient);
 };

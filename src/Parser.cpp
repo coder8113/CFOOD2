@@ -5,13 +5,12 @@ Parser::Parser(std::string data) {
 	m_Span.position = 0;
 	m_Span.span = 0;
 	m_State = INIT_MODE;
-
+	recipe = new Recipe();
 }
 
 Recipe* Parser::getReceipe()
 {
-	return NULL;
-	//Recipe* newReceipe = new Recipe();
+	return recipe;
 }
 
 void Parser::Parse()
@@ -42,7 +41,6 @@ void Parser::Parse()
 		advance();
 	}
 	printf("\n\n\n\n");
-	recipe.Display();
 }
 
 void Parser::parseHeading()
@@ -92,7 +90,7 @@ void Parser::parseHeading()
 	}
 	std::string title = pop();
 	printf("<title> %s\n", title.c_str());
-	recipe.setTitle(title);
+	recipe->setTitle(title);
 
 }
 
@@ -161,7 +159,7 @@ void Parser::parseIngredient()
 
 		if (internalUnit != Recipe::other) {
 			printf("<INGREDIENT> <val> %d, <unit> %s, <desc> %s\n", value, unit.c_str(), ingredient.c_str());
-			recipe.addIngredient(value, internalUnit, ingredient);
+			recipe->addIngredient(value, internalUnit, ingredient);
 
 			return;
 		}
@@ -181,7 +179,7 @@ void Parser::parseIngredient()
 	printf("<ingredient> %s \n", bulletPoint.c_str());
 	if (m_State == INGREDIENTS_MODE)
 	{
-		recipe.addIngredient(-1, Recipe::other, bulletPoint);
+		recipe->addIngredient(-1, Recipe::other, bulletPoint);
 	}
 }
 
@@ -211,7 +209,7 @@ void Parser::parseList()
 	printf("<list> %s %s\n", digit.c_str(), line.c_str());
 	if (m_State == INSTRUCTIONS_MODE)
 	{
-		recipe.addInstruction(line);
+		recipe->addInstruction(line);
 	}
 
 }

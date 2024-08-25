@@ -71,6 +71,38 @@ std::string file::LoadFile(const wchar_t* fileName)
     return oss.str(); // Convert the stringstream to a string
 }
 
+bool file::saveRecipeToFile(Recipe* recipe)
+{
+    std::string textToWrite = recipe->toString();
+
+    std::stringstream ss;
+    ss << "Recipes/" << recipe->title << ".md";  // Format the filename
+
+    std::string filename = ss.str();
+    for (char& c : filename) {
+        if (c == ' ') {
+            c = '_';
+        }
+    }
+
+    std::ofstream outFile(filename);  // Open the file
+
+    // Check if the file was opened successfully
+    if (!outFile) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return false; // Return with an error code
+    }
+
+    // Write the string to the file
+    outFile << textToWrite;
+
+    // Close the file
+    outFile.close();
+
+    // Notify the user
+    std::cout << "String written to file successfully!" << std::endl;
+    return true;
+}
 /*
 
 Recipe file::parseRecipeFile(std::string recipeFile)
