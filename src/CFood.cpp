@@ -5,7 +5,7 @@
 #include "./file.h"
 #include "./Parser.h"
 #include "./Recipe.h"
-
+#include "./EventListener.h"
 #include <vector>
 #include <string>
 
@@ -61,4 +61,6 @@ int main()
     std::vector<Recipe*> recipes = file::loadAllRecipes(L"Recipes");
     recipes.at(0)->Display();
 
+    EventListener::MainLoop();
+    
 }
