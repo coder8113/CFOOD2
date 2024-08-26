@@ -1,0 +1,16 @@
+DOXYFILE = doc/Doxyfile.in # We can reuse our Doxyfile
+
+... Other variables ...
+
+#---------------------------------------------------------------------------
+# Doxygen Configuration
+#---------------------------------------------------------------------------
+
+# These variables have to be redefined since codedocs cannot run CMake
+PROJECT_NAME = "C-Food" # <-- These constants have to be hardcoded in
+PROJECT_NUMBER = 1.0
+PROJECT_BRIEF = "A command-line virtual recipe book"
+OUTPUT_DIRECTORY = doc/
+INPUT = doc/ include/
+USE_MDFILE_AS_MAINPAGE = doc/main_page.md
+EXTRACT_ALL = NO
