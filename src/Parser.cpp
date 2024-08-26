@@ -14,6 +14,13 @@ Recipe* Parser::getReceipe()
 	return recipe;
 }
 
+/**
+ * @brief Parses the entire recipe file
+ * 
+ * This function parses all of the data contained in a recipe file, by combining the 
+ * different helper parsing functions.
+ *
+ */
 void Parser::Parse()
 {
 	while (m_Span.position + m_Span.span < m_Span.data.length()) {
@@ -44,6 +51,15 @@ void Parser::Parse()
 	printf("\n\n\n\n");
 }
 
+/**
+ * @brief Adds two numbers.
+ * 
+ * This function adds two integer numbers and returns the result.
+ *
+ * @param a First integer.
+ * @param b Second integer.
+ * @return int Sum of a and b.
+ */
 void Parser::parseHeading()
 {
 	advance();
