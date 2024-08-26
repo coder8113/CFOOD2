@@ -1,3 +1,10 @@
+/**
+ * @file Recipe.h
+ * @brief This file contains the definition of the Recipe class, 
+ * which is responsible for organizing recipe files in a standard format.
+ * 
+ *
+ */
 #pragma once
 #include <string>
 #include <cstdint>

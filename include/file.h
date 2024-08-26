@@ -1,3 +1,9 @@
+/**
+ * @file file.h
+ * @brief This file is a utility class which contains file management functions
+ * It interacts with the filesystem to load, save, list, and delete files, providing 
+ * essential functionality for applications dealing with recipes or other data stored in files.
+ */
 #pragma once
 
 #include <string>
