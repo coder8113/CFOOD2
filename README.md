@@ -8,6 +8,9 @@ serving size adjustments, and unit conversions.
 
 ## Testing
 
+## Documentation
+Documentation for this project was produced using doxygen. Our site can be viewed at: https://codedocs.xyz/coder8113/CFOOD2/index.html
+
 
 ## Usage 
 
