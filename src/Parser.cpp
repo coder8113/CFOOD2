@@ -19,7 +19,7 @@ Recipe* Parser::getReceipe()
  * 
  * This function parses all of the data contained in a recipe file, by combining the 
  * different helper parsing functions.
- *
+ * TODO: Inifinit loop needs to be fixed.
  */
 void Parser::Parse()
 {

@@ -42,19 +42,23 @@ int main()
     }
 
 
-    std::vector<wchar_t*> fileTable;
-    file::ListDirectoryContents(&fileTable, L"Recipes");
+    //std::vector<wchar_t*> fileTable;
+    //file::ListDirectoryContents(&fileTable, L"Recipes");
 
-    std::string test = file::LoadFile(fileTable.at(0));
-    
-    //printf("%s\n", test.c_str());
+    //std::string test = file::LoadFile(fileTable.at(0));
+    //
+    ////printf("%s\n", test.c_str());
 
-    Parser a = Parser(file::LoadFile(fileTable.at(0)), 
-        util::wide_to_narrow(fileTable.at(0)));
-    a.Parse();
-    Recipe* r = a.getReceipe();
-    r->Display();
-    r->setTitle("TEST_SAVE");
-    file::saveRecipeToFile(r);
+    //Parser a = Parser(file::LoadFile(fileTable.at(0)), 
+    //    util::wide_to_narrow(fileTable.at(0)));
+    //a.Parse();
+    //Recipe* r = a.getReceipe();
+    //r->Display();
+    //r->setTitle("TEST_SAVE");
+    //file::saveRecipeToFile(r);
    
+
+    std::vector<Recipe*> recipes = file::loadAllRecipes(L"Recipes");
+    recipes.at(0)->Display();
+
 }

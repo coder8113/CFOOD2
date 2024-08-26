@@ -45,6 +45,6 @@ private:
 	char peekChar();
 	bool advance(uint64_t amount=1);
 	std::string pop();
-
+	
 };
 
