@@ -76,6 +76,29 @@ void Recipe::addInstruction(std::string instruction)
 	instructions.push_back(instruction);
 }
 
+void Recipe::addInstructionAt(std::string instruction, uint32_t position)
+{
+	if (position > this->instructions.size())
+	{
+		this->instructions.push_back(instruction);
+	}
+
+	if (position < 0)
+	{
+		return;
+	}
+
+	this->instructions.insert(
+		this->instructions.begin() + position,
+		instruction);
+
+}
+
+void Recipe::setInstructionAt(std::string instruction, uint32_t position)
+{
+	return;
+}
+
 void Recipe::setRemarks(std::string remark)
 {
 	remarks = remark;

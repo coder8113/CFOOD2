@@ -116,12 +116,3 @@ bool file::deleteFile(std::string filename)
 
     return false;
 }
-/*
-
-Recipe file::parseRecipeFile(std::string recipeFile)
-{
-
-    const char* contents = recipeFile.c_str();
-    uint32_t left = 0;
-    uint32_t right = 0;
-}*/

@@ -129,11 +129,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Display.h" />
+    <ClInclude Include="EventListener.h" />
     <ClInclude Include="include\file.h" />
     <ClInclude Include="include\Parser.h" />
     <ClInclude Include="include\Recipe.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="src\CFood.cpp" />
     <ClCompile Include="src\file.cpp" />
     <ClCompile Include="src\Parser.cpp" />

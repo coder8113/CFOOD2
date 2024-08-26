@@ -47,7 +47,10 @@ public:
 	
 	std::vector<std::string> instructions;
 	void addInstruction(std::string instruction);
-	
+	void addInstructionAt(std::string instruction, uint32_t position);
+	void setInstructionAt(std::string instruction, uint32_t
+		position);
+
 	std::string remarks;
 	void setRemarks(std::string remark);
 
