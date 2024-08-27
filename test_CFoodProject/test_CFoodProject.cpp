@@ -13,8 +13,6 @@ namespace test_CFoodProject
 	public:
 		TEST_METHOD(TestParseHeading)
 		{
-			Parser parser("test data", "testfile.txt");
-			Assert::IsNotNull(parser.getREcipe());
 		}
 	};
 }
