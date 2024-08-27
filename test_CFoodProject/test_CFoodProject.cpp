@@ -1,7 +1,7 @@
 
-#include "pch.h"
+
 #include "CppUnitTest.h"
-#include "../test_CFoodProject/test_CFoodProject.cpp"
+
 #include "Parser.h"
 
 
