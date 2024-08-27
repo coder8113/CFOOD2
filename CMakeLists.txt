@@ -26,7 +26,7 @@ ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
 )
 
 add_executable(test_CFoodProject
-    ${PROJECT_SOURCE_DIR}/tests/test_Parser.cpp
+    ${PROJECT_SOURCE_DIR}/test_CFoodProject/test_CFoodProject.cpp
     # Add other test files if needed
 )
 
