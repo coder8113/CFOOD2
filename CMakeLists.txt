@@ -16,3 +16,21 @@ ${PROJECT_SOURCE_DIR}/src/Parser.cpp
 ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
 ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
 )
+
+add_executable(test_CFoodProject
+    ${PROJECT_SOURCE_DIR}/tests/test_Parser.cpp
+    # Add other test files if needed
+)
+
+add_custom_target(coverage
+    COMMAND ${CMAKE_MAKE_PROGRAM} test_CFoodProject
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    COMMAND lcov --capture --directory . --output-file coverage.info
+    COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    COMMAND lcov --list coverage.info
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Running tests and generating coverage report"
+)
+
+enable_testing()
+add_test(NAME RunUnitTests COMMAND test_CFoodProject)
