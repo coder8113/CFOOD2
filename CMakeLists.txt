@@ -9,6 +9,14 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_definitions(-DUNICODE -D_UNICODE)
 
+add_library(HelloCov STATIC
+${PROJECT_SOURCE_DIR}/src/CFood.cpp
+${PROJECT_SOURCE_DIR}/src/file.cpp
+${PROJECT_SOURCE_DIR}/src/Parser.cpp
+${PROJECT_SOURCE_DIR}/src/Recipe.cpp
+${PROJECT_SOURCE_DIR}/src/EventListener.cpp
+)
+
 add_executable(CFoodProject
 ${PROJECT_SOURCE_DIR}/src/CFood.cpp
 ${PROJECT_SOURCE_DIR}/src/file.cpp
@@ -21,6 +29,14 @@ add_executable(test_CFoodProject
     ${PROJECT_SOURCE_DIR}/tests/test_Parser.cpp
     # Add other test files if needed
 )
+
+target_link_libraries(test_CFoodProject HelloCov)
+
+option(COVERAGE "Enable coverage reporting" ON)
+if(COVERAGE)
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()
 
 add_custom_target(coverage
     COMMAND ${CMAKE_MAKE_PROGRAM} test_CFoodProject
