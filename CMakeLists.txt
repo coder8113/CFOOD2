@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories("C:/Program Files (x86)/Microsoft Visual Studio/2022/Community/VC/Auxiliary/VS/UnitTest/include")
+
 
 add_definitions(-DUNICODE -D_UNICODE)
 
