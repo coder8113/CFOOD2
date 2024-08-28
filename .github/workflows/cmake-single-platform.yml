@@ -33,7 +33,7 @@ jobs:
 
     - name: Generate Coverage Report
       shell: cmd
-      run: OpenCppCoverage --modules Debug --export_type cobertura:cmakeci.xml --cover_children -- ctest -C Debug --x64\Debug\tests.exe
+      run: OpenCppCoverage --export_type cobertura:cmakeci.xml -- ctest -C Debug --tests.exe
       
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
