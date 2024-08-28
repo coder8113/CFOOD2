@@ -31,6 +31,11 @@ jobs:
       with:
         vs-version: 'latest'
         
+    - name: Install OpenCppCoverage
+      run: |
+        choco install OpenCppCoverage
+        echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+        
     - name: Create Registry Key for Visual Studio Path
       shell: pwsh
       run: |
