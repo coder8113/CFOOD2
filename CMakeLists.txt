@@ -5,29 +5,38 @@ project(CFoodProject)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Include directories for header files
 include_directories(
-	${PROJECT_SOURCE_DIR}/include
-	${PROJECT_SOURCE_DIR}/lib/test_library
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/lib/test_library
 )
-
 
 add_definitions(-DUNICODE -D_UNICODE)
-add_library(test_library ${PROJECT_SOURCE_DIR}/test_library/test_library.cpp)
 
+# Define the main executable for the project
 add_executable(CFoodProject
-${PROJECT_SOURCE_DIR}/src/CFood.cpp
-${PROJECT_SOURCE_DIR}/src/file.cpp
-${PROJECT_SOURCE_DIR}/src/Parser.cpp
-${PROJECT_SOURCE_DIR}/src/Recipe.cpp
-${PROJECT_SOURCE_DIR}/src/EventListener.cpp
-${PROJECT_SOURCE_DIR}/src/Menu.cpp
+    ${PROJECT_SOURCE_DIR}/src/CFood.cpp
+    ${PROJECT_SOURCE_DIR}/src/file.cpp
+    ${PROJECT_SOURCE_DIR}/src/Parser.cpp
+    ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
+    ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
+    ${PROJECT_SOURCE_DIR}/src/Menu.cpp
 )
 
-add_executable(tests ${PROJECT_SOURCE_DIR}/tests/tests.cpp)
-target_link_libraries(tests PRIVATE test_library)
+# Define the test executable
+add_executable(tests
+    ${PROJECT_SOURCE_DIR}/src/tests.cpp
+    ${PROJECT_SOURCE_DIR}/src/file.cpp        # Include source files needed for the test
+    ${PROJECT_SOURCE_DIR}/src/Parser.cpp
+    ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
+    ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
+    ${PROJECT_SOURCE_DIR}/src/Menu.cpp
+)
+
+# Add tests
 enable_testing()
 
 add_test(
-	NAME tests
-	COMMAND $<TARGET_FILE:tests>
+    NAME tests
+    COMMAND $<TARGET_FILE:tests>
 )
