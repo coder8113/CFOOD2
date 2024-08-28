@@ -10,6 +10,9 @@
 int main() {
 	Menu::unittest();
 	Parser::unittest();
+	Recipe::unittest();
+	file::unittest();
+	Util::unittest();
 	std::cout << "Test Done!";
 	return 0;
 }

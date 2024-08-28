@@ -144,3 +144,7 @@ std::string file::wcharToString(const wchar_t* wstr) {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
     return converter.to_bytes(wide_str);
 }
+
+void file::unittest(){
+	
+}

@@ -18,7 +18,11 @@
 class Recipe
 {
 public:
-
+	/**
+     * @brief Runs unit tests for the Menu class.
+     */
+	static void unittest();
+	
     /**
      * @brief Enum representing various units of measurement for ingredients.
      */

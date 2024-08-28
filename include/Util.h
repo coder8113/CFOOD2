@@ -14,6 +14,11 @@
 class Util
 {
 public:
+	/**
+     * @brief Runs unit tests for the Menu class.
+     */
+	static void unittest();
+	
 	/*!
 	* Returns the index of the first instance of the substring
 	* @param recipe_list recipe list to search through

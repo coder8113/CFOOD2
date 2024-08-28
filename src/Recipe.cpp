@@ -268,5 +268,7 @@ std::vector<std::string> Recipe::toStringArray()
 	return result;
 }
 
-
+void Recipe::unittest(){
+	
+}
 

@@ -2,9 +2,9 @@ name: CMake on a single platform
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "unit-testing" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "unit-testing" ]
 
 env:
   BUILD_TYPE: Debug
