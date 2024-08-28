@@ -26,6 +26,7 @@ public:
 	*/
 	static uint32_t search_recipe_list(std::vector<Recipe*>* recipe_list, std::string substring);
 	static std::string toLowerCase(std::string str);
+	static std::string toAnsi(std::wstring wstr);
 private:
 };
 

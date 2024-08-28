@@ -1,5 +1,9 @@
 #include "Util.h"
 
+#include <algorithm>
+#include <cstdint>
+
+#include <Windows.h>
 
 uint32_t Util::search_recipe_list(std::vector<Recipe*>* recipe_list,
 	std::string substring)
@@ -19,22 +23,31 @@ uint32_t Util::search_recipe_list(std::vector<Recipe*>* recipe_list,
 
 std::string Util::toLowerCase(std::string str)
 {
-	std::string lowercase;
+	std::transform(str.begin(), str.end(), str.begin(), std::tolower);
+	return str;
+}
 
+std::string Util::toAnsi(std::wstring wstr) 
+{
+	int RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), wstr.length(), NULL, 0, NULL, NULL);
 
-	for (uint32_t i = 0; i < str.length(); i++)
+	if (!RequiredLength)
 	{
-		char c = str.at(i);
-		if ('A' <= c && c <= 'Z')
-		{
-			lowercase.push_back(c + 'a' - 'A');
-		}
-		else
-		{
-			lowercase.push_back(c);
-		}
+		printf("Util::toAnsi failed with error %d!\r\n", GetLastError());
+		return {};
 	}
-	return lowercase;
+
+	std::string str(RequiredLength, '\0');
+
+	RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), wstr.length(), const_cast<char*>(str.data()), str.length(), NULL, NULL);
+
+	if (!RequiredLength)
+	{
+		printf("Util::toAnsi failed with error %d!\r\n", GetLastError());
+		return {};
+	}
+
+	return str;
 }
 
 void Util::unittest(){

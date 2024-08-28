@@ -77,13 +77,4 @@ public:
      * @return True if the file was successfully deleted, false otherwise.
      */
     static bool deleteFile(std::string filename);
-
-private:
-    /**
-     * @brief Converts a wide-character string (wchar_t*) to a standard string.
-     * 
-     * @param wstr The wide-character string to convert.
-     * @return A standard string containing the converted characters.
-     */
-    static std::string wcharToString(const wchar_t* wstr);
 };
