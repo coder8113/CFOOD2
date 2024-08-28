@@ -36,3 +36,7 @@ std::string Util::toLowerCase(std::string str)
 	}
 	return lowercase;
 }
+
+void Util::unittest(){
+	
+}

@@ -1,4 +1,5 @@
 #include "./Menu.h"
+#include <iostream>
 
 void Menu::Display()
 {
@@ -236,5 +237,56 @@ void Menu::displayRecipe()
 
 void Menu::unittest(){
     Menu menu;
-   
+
+    // Setup a mock list of recipes
+    std::vector<Recipe*> recipes;
+    Recipe recipe1, recipe2, recipe3;
+    recipe1.setTitle("Pasta");
+    recipe2.setTitle("Salad");
+    recipe3.setTitle("Pizza");
+
+    recipes.push_back(&recipe1);
+    recipes.push_back(&recipe2);
+    recipes.push_back(&recipe3);
+
+    // Assign the recipes to the menu
+    menu.setRecipeList(&recipes);
+
+    // Test displayMainMenu and menu navigation
+    std::cout << "Testing displayMainMenu" << std::endl;
+    menu.displayMainMenu();
+
+    std::cout << "Testing cursor movement" << std::endl;
+    menu.cursorDown();
+    menu.displayMainMenu(); // Expect cursor to move to the next recipe
+
+    menu.cursorUp();
+    menu.displayMainMenu(); // Expect cursor to move back to the first recipe
+
+    // Test selecting a recipe
+    std::cout << "Testing recipe selection" << std::endl;
+    menu.selectRecipe();
+    menu.displayRecipe(); // Expect the recipe details of the selected recipe to be displayed
+
+    // Test printSize (indirectly testing updateScreenSize)
+    std::cout << "Testing screen size printing" << std::endl;
+    menu.printSize(); // Should print the number of rows and columns in the console window
+
+    // Test adding letters to search
+    std::cout << "Testing search functionality" << std::endl;
+    menu.addLetterToSearch('p');
+    menu.displayMainMenu(); // Expect to find "Pasta" or "Pizza" based on search
+
+    // Test resetting search
+    std::cout << "Testing resetSearch" << std::endl;
+    menu.resetSearch();
+    menu.displayMainMenu(); // Search should be cleared
+
+    // Test displaying a long line of text
+    std::cout << "Testing long line wrapping" << std::endl;
+    std::string long_line = "This is a very long line that should wrap when it exceeds the width of the console window.";
+    menu.printLineLeftJustified(long_line, 0);
+
+    std::cout << "All tests completed." << std::endl;
 }
+

@@ -1,3 +1,8 @@
+/**
+ * @file tests.h
+ * @brief This file contains the main method to run the 
+ * statically defined unit tests for the program
+ */
 #ifndef TEST_H
 #define TEST_H
 

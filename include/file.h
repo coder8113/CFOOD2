@@ -32,6 +32,11 @@
 class file
 {
 public:
+	/**
+     * @brief Runs unit tests for the Menu class.
+     */
+	static void unittest();
+	
     /**
      * @brief Lists the contents of a directory and stores them in a provided vector.
      * 

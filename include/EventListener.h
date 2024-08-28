@@ -1,3 +1,7 @@
+/**
+ * @file EventListener.h
+ * @brief This file defines the EventListener class which handles key presses
+ */
 #pragma once
 
 #include <windows.h>
