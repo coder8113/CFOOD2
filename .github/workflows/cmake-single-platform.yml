@@ -36,6 +36,11 @@ jobs:
         choco install OpenCppCoverage
         echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
         
+    - name: Verify vstest.console.exe Installation
+      shell: cmd
+      run: |
+        where vstest.console.exe
+        
     - name: Create Registry Key for Visual Studio Path
       shell: pwsh
       run: |
