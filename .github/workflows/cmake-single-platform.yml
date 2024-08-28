@@ -30,6 +30,15 @@ jobs:
       uses: microsoft/setup-msbuild@v1
       with:
         vs-version: 'latest'
+        
+    - name: Find vstest.console.exe using vswhere
+      shell: cmd
+      run: |
+        set VS_INSTALL_PATH="C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+        set VS_PATH=$(vswhere -products * -requires Microsoft.Component.MSBuild -property installationPath -latest)
+        echo Found Visual Studio at: %VS_PATH%
+        echo Listing vstest.console.exe
+        dir "%VS_PATH%\Common7\IDE\PublicAssemblies\vstest.console.exe"
 
     - name: Install OpenCppCoverage
       run: |
