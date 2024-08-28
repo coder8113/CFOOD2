@@ -1,4 +1,6 @@
 #include "./Parser.h"
+#include <iostream>
+#include <cassert>
 
 Parser::Parser(std::string data, std::string filename) {
 	m_Span.data = data;
@@ -249,7 +251,13 @@ std::string Parser::pop() {
 	return result;
 }
 
-void Parser::unittest(){
-    Parser parser();
+void Parser::unittest() {
+	
+
+
+	Parser parser();
+
+
+
 
 }

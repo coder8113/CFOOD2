@@ -1,4 +1,6 @@
 #include "Util.h"
+#include <iostream>
+#include <cassert>
 
 
 uint32_t Util::search_recipe_list(std::vector<Recipe*>* recipe_list,
@@ -37,6 +39,12 @@ std::string Util::toLowerCase(std::string str)
 	return lowercase;
 }
 
-void Util::unittest(){
-	
+void Util::unittest() {
+    // Test toLowerCase function
+    std::string input = "HeLLo WoRLD!";
+    std::string expectedOutput = "hello world!";
+    assert(toLowerCase(input) == expectedOutput);
+    std::cout << "toLowerCase test passed." << std::endl;
+
+    
 }

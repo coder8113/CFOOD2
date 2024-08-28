@@ -1,4 +1,6 @@
 #include "./Recipe.h"
+#include <iostream>
+#include <cassert>
 
 Recipe::Recipe() 
 {
@@ -268,7 +270,56 @@ std::vector<std::string> Recipe::toStringArray()
 	return result;
 }
 
-void Recipe::unittest(){
-	
-}
+void Recipe::unittest() {
+	// Create a Recipe object
+	Recipe recipe;
 
+	// Test setting and getting title
+	recipe.setTitle("Spaghetti Carbonara");
+	assert(recipe.title == "Spaghetti Carbonara");
+	std::cout << "Title test passed." << std::endl;
+
+	// Test adding ingredients
+	recipe.addIngredient(200, Recipe::gram, "spaghetti");
+	recipe.addIngredient(100, Recipe::gram, "pancetta");
+	recipe.addIngredient(2, Recipe::tablespoon, "olive oil");
+	recipe.addIngredient(1, Recipe::cup, "parmesan cheese");
+	recipe.addIngredient(-1, Recipe::other, "salt and pepper to taste");
+
+	assert(recipe.ingredients.size() == 5);
+	assert(recipe.ingredients[0].value == 200);
+	assert(recipe.ingredients[0].measurement == Recipe::gram);
+	assert(recipe.ingredients[0].ingredient == "spaghetti");
+
+	assert(recipe.ingredients[1].value == 100);
+	assert(recipe.ingredients[1].measurement == Recipe::gram);
+	assert(recipe.ingredients[1].ingredient == "pancetta");
+
+	assert(recipe.ingredients[2].value == 2);
+	assert(recipe.ingredients[2].measurement == Recipe::tablespoon);
+	assert(recipe.ingredients[2].ingredient == "olive oil");
+
+	assert(recipe.ingredients[3].value == 1);
+	assert(recipe.ingredients[3].measurement == Recipe::cup);
+	assert(recipe.ingredients[3].ingredient == "parmesan cheese");
+
+	assert(recipe.ingredients[4].value == -1);
+	assert(recipe.ingredients[4].measurement == Recipe::other);
+	assert(recipe.ingredients[4].ingredient == "salt and pepper to taste");
+
+	std::cout << "Ingredients test passed." << std::endl;
+
+	// Test adding instructions
+	recipe.addInstruction("Boil spaghetti in salted water.");
+	recipe.addInstruction("Fry pancetta in olive oil.");
+	recipe.addInstruction("Mix spaghetti with pancetta and cheese.");
+	recipe.addInstruction("Season with salt and pepper.");
+
+	assert(recipe.instructions.size() == 4);
+	assert(recipe.instructions[0] == "Boil spaghetti in salted water.");
+	assert(recipe.instructions[1] == "Fry pancetta in olive oil.");
+	assert(recipe.instructions[2] == "Mix spaghetti with pancetta and cheese.");
+	assert(recipe.instructions[3] == "Season with salt and pepper.");
+
+	std::cout << "Instructions test passed." << std::endl;
+}
