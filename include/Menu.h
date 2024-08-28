@@ -12,6 +12,7 @@
 class Menu
 {
 public:
+	static void unittest();
 	void Display();
 	void printSize();
 

@@ -20,7 +20,7 @@
 class Parser
 {
 public:
-
+	static void unittest();
 	/**
 	 * @brief Struct to hold data, position, and span information for parsing.
 	 */

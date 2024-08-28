@@ -192,3 +192,8 @@ void Menu::displayRecipe()
     }
 
 }
+
+void Menu::unittest(){
+    Menu menu;
+   
+}

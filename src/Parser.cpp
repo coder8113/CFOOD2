@@ -248,3 +248,8 @@ std::string Parser::pop() {
 	m_Span.span = 0;
 	return result;
 }
+
+void Parser::unittest(){
+    Parser parser();
+
+}
