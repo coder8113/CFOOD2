@@ -1,9 +1,12 @@
 ## Name
 C-Food
-
+<!-- Exclude the badges from Doxygen processing -->
+\cond
 [![codecov](https://codecov.io/github/coder8113/CFOOD2/graph/badge.svg?token=ZILMEL7W6Q)](https://codecov.io/github/coder8113/CFOOD2)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5622b90dd25e4474a28dd4132e6700cf)](https://app.codacy.com/gh/coder8113/CFOOD2/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+\endcond
+
 
 
 ## Description
