@@ -1,13 +1,6 @@
 ## Name
 C-Food
 
-[![codecov](https://codecov.io/github/coder8113/CFOOD2/graph/badge.svg?token=ZILMEL7W6Q)](https://codecov.io/github/coder8113/CFOOD2)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5622b90dd25e4474a28dd4132e6700cf)](https://app.codacy.com/gh/coder8113/CFOOD2/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-
-
-
-
 ## Description
 C-Food is a command-line virtual recipe book. The app comes prepackaged with common recipes and some of our favourites. We plan on having a searchable index of recipes. 
 Users will be able to search for a recipe based on: the recipe title, category tags, and the ingredients. We will also include the ability to add, edit and delete recipes, 
