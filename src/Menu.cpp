@@ -169,7 +169,6 @@ void Menu::addLetterToSearch(char c)
 
 void Menu::resetSearch()
 {
-    cursor = 0;
     substring_to_search.clear();
 }
 

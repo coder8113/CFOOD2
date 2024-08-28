@@ -35,7 +35,7 @@ void EventListener::MainLoop()
 		}
 
 
-		Sleep(120);
+		Sleep(60);
 	}
 
 }
