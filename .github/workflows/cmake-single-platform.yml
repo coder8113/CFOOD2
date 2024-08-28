@@ -31,29 +31,24 @@ jobs:
       with:
         vs-version: 'latest'
         
-    - name: Find vstest.console.exe using vswhere
+    - name: Find Visual Studio Path and vstest.console.exe
       shell: cmd
+      id: find_vstest
       run: |
-        set VS_INSTALL_PATH="C:\Program Files (x86)\Microsoft Visual Studio\Installer"
-        set VS_PATH=$(vswhere -products * -requires Microsoft.Component.MSBuild -property installationPath -latest)
+        set VS_PATH="C:\ProgramData\Chocolatey\bin\vswhere.exe -products * -requires Microsoft.Component.MSBuild -property installationPath -latest"
         echo Found Visual Studio at: %VS_PATH%
-        echo Listing vstest.console.exe
         dir "%VS_PATH%\Common7\IDE\PublicAssemblies\vstest.console.exe"
-
-    - name: Install OpenCppCoverage
-      run: |
-        choco install OpenCppCoverage
-        echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+        echo "##vso[task.setvariable variable=VS_PATH]%VS_PATH%"
 
     - name: Generate Coverage Report
       shell: cmd
       working-directory: ${{github.workspace}}/build
       run: |
-        OpenCppCoverage --modules Debug --export_type cobertura:cfood.xml -- "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies\vstest.console.exe" x64\Debug\tests.exe
+        OpenCppCoverage --modules Debug --export_type cobertura:cfood.xml -- "%VS_PATH%\Common7\IDE\PublicAssemblies\vstest.console.exe" x64\Debug\tests.exe
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
       with:
         fail_ci_if_error: true
-        files: coverage.xml
+        files: cfood.xml
         token: ${{ secrets.CODECOV_TOKEN }}
