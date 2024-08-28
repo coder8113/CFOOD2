@@ -1,8 +1,3 @@
-/*!
- * @mainpage
- * 
- */
-
 ## Name
 C-Food
 
