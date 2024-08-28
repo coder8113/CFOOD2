@@ -40,7 +40,7 @@ jobs:
       shell: cmd
       working-directory: ${{github.workspace}}/build
       run: |
-        set "VSTEST_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\PublicAssemblies"
+        set "VSTEST_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
         OpenCppCoverage --modules Debug --export_type cobertura:coverage.xml -- "%VSTEST_PATH%\vstest.console.exe" tests.exe
 
     - name: Upload Report to Codecov
