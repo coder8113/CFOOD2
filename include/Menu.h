@@ -10,51 +10,123 @@
 #include "EventListener.h"
 #include "Util.h"
 
+/**
+ * @brief The Menu class is responsible for handling the display and interaction with a menu system,
+ * including navigating recipes, searching, and updating the display.
+ */
 class Menu
 {
 public:
-	static void unittest();
-	void Display();
-	void printSize();
+    /**
+     * @brief Runs unit tests for the Menu class.
+     */
+    static void unittest();
 
-	void setRecipeList(std::vector<Recipe*>* recipes)
-	{
-		recipesList = recipes;
-	}
+    /**
+     * @brief Displays the current menu or interface on the screen.
+     */
+    void Display();
 
-	void displayMainMenu();
-	void mainMenuCallBack(int vk);
+    /**
+     * @brief Prints the size of the menu or interface.
+     */
+    void printSize();
 
-	void displayRecipe();
-	void recipeMenuCallBack(int vk);
+    /**
+     * @brief Sets the list of recipes for the menu to display.
+     * 
+     * @param recipes A pointer to a vector of Recipe pointers.
+     */
+    void setRecipeList(std::vector<Recipe*>* recipes)
+    {
+        recipesList = recipes;
+    }
 
-	void addLetterToSearch(char c);
+    /**
+     * @brief Displays the main menu of the program.
+     */
+    void displayMainMenu();
 
-	void selectRecipe();
+    /**
+     * @brief Handles the callback for main menu input.
+     * 
+     * @param vk The virtual key code for the pressed key.
+     */
+    void mainMenuCallBack(int vk);
 
-	void cursorUp();
-	void cursorDown();
+    /**
+     * @brief Displays the current selected recipe.
+     */
+    void displayRecipe();
 
-	void resetSearch();
+    /**
+     * @brief Handles the callback for recipe menu input.
+     * 
+     * @param vk The virtual key code for the pressed key.
+     */
+    void recipeMenuCallBack(int vk);
 
-	uint32_t printLineLeftJustified(std::string line, uint32_t indent);
+    /**
+     * @brief Adds a letter to the current search string.
+     * 
+     * @param c The character to add to the search string.
+     */
+    void addLetterToSearch(char c);
+
+    /**
+     * @brief Selects the currently highlighted recipe.
+     */
+    void selectRecipe();
+
+    /**
+     * @brief Moves the cursor up in the menu.
+     */
+    void cursorUp();
+
+    /**
+     * @brief Moves the cursor down in the menu.
+     */
+    void cursorDown();
+
+    /**
+     * @brief Resets the current search string.
+     */
+    void resetSearch();
+
+    /**
+     * @brief Prints a line left-justified with a given indent.
+     * 
+     * @param line The string to print.
+     * @param indent The number of spaces to indent.
+     * @return The length of the printed line.
+     */
+    uint32_t printLineLeftJustified(std::string line, uint32_t indent);
 
 private:
-	uint32_t rows = 0;
-	uint32_t cols = 0;
-	uint32_t topRow = 0;
-	uint32_t cursor = 0;
+    uint32_t rows = 0;        /**< The number of rows in the display. */
+    uint32_t cols = 0;        /**< The number of columns in the display. */
+    uint32_t topRow = 0;      /**< The top row currently displayed. */
+    uint32_t cursor = 0;      /**< The current cursor position in the menu. */
 
-	HWND window;
-	HANDLE output_handle;
+    HWND window;              /**< The handle to the window. */
+    HANDLE output_handle;     /**< The handle to the console output. */
 
-	std::string substring_to_search;
+    std::string substring_to_search;  /**< The search string being used for filtering recipes. */
 
-	std::vector<Recipe*>* recipesList;
-	Recipe* recipeToDisplay = NULL;
+    std::vector<Recipe*>* recipesList; /**< A pointer to the list of recipes available in the menu. */
+    Recipe* recipeToDisplay = NULL;    /**< The currently selected recipe to display. */
 
+    /**
+     * @brief Prints the specified amount of indentation spaces.
+     * 
+     * @param indent The number of spaces to print.
+     */
+    void printIndent(uint32_t indent);
 
-	void printIndent(uint32_t indent);
-	bool updateScreenSize();
+    /**
+     * @brief Updates the screen size based on the current window dimensions.
+     * 
+     * @return True if the screen size was updated, false otherwise.
+     */
+    bool updateScreenSize();
 };
-
