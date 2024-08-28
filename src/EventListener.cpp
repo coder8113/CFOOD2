@@ -4,10 +4,24 @@ void EventListener::MainLoop()
 {
 	while (true)
 	{
-		if (GetAsyncKeyState('W') & 0x8000) 
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000) 
 		{
-			std::cout << "'W' key is pressed.\n";
+			std::cout << "Down key is pressed.\n";
+			continue;
 		}
+
+		if (GetAsyncKeyState(VK_UP) & 0x8000) 
+		{
+			std::cout << "Up key is pressed\n";
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_RETURN) & 0x8000) 
+		{
+			std::cout << "Enter key is pressed\n";
+			continue;
+		}
+
 
 		Sleep(75);
 	}

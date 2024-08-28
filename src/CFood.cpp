@@ -6,6 +6,7 @@
 #include "./Parser.h"
 #include "./Recipe.h"
 #include "./EventListener.h"
+#include "./Menu.h"
 #include <vector>
 #include <string>
 
@@ -61,6 +62,10 @@ int main()
     std::vector<Recipe*> recipes = file::loadAllRecipes(L"Recipes");
     recipes.at(0)->Display();
 
+
+    Menu menu;
+    menu.printSize();
+    menu.printLine("very long string which should be properly left-justified.");
+
     EventListener::MainLoop();
-    
 }

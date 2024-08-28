@@ -15,4 +15,5 @@ ${PROJECT_SOURCE_DIR}/src/file.cpp
 ${PROJECT_SOURCE_DIR}/src/Parser.cpp
 ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
 ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
+${PROJECT_SOURCE_DIR}/src/Menu.cpp
 )
