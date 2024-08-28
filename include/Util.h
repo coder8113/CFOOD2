@@ -1,3 +1,10 @@
+/**
+ * @file Util.h
+ * @brief This file contains the definition of the Util class, 
+ * which is responsible for the search function.
+ * 
+ *
+ */
 #pragma once
 #include <vector>
 #include <string>

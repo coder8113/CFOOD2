@@ -20,6 +20,9 @@
 class Parser
 {
 public:
+	/**
+     * @brief Runs unit tests for the Menu class.
+     */
 	static void unittest();
 	/**
 	 * @brief Struct to hold data, position, and span information for parsing.
