@@ -25,4 +25,28 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
+      
+    - name: Install OpenCppCoverage
+      run: |
+        choco install OpenCppCoverage
+        echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+
+
+    - name: Generate Coverage Report
+      shell: cmd
+      run: OpenCppCoverage --modules Debug --export_type cobertura:cmakeci.xml --cover_children -- ctest -C ${{env.BUILD_TYPE}} --x64\Debug\tests.exe
+    - name: Upload Report to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        fail_ci_if_error: true
+        files: coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+ build
+
+    - name: Upload Report to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        fail_ci_if_error: true
+        files: cmakeci.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
 
