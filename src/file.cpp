@@ -148,30 +148,23 @@ std::string file::wcharToString(const wchar_t* wstr) {
     return converter.to_bytes(wide_str);
 }
 
-std::string createTempFile(const std::string& content) {
-    static int fileCounter = 0;
-    std::string filename = "tempfile_" + std::to_string(fileCounter++) + ".txt";
-    std::ofstream outfile(filename);
-    if (!outfile) {
-        throw std::runtime_error("Error creating temporary file");
-    }
-    outfile << content;
-    outfile.close();
-    return filename;
-}
-
 void file::unittest() {
-    // Test create and delete file
     try {
-        // Create a temporary file
-        std::string tempFilename = createTempFile("Test content");
+        // Create a temporary file directly
+        std::string tempFilename = "tempfile_test.txt";
+        std::ofstream outfile(tempFilename);
+        if (!outfile) {
+            throw std::runtime_error("Error creating temporary file");
+        }
+        outfile << "Test content";
+        outfile.close();
 
         // Test LoadFile
         std::string content = LoadFile(tempFilename.c_str());
         assert(content == "Test content");
         std::cout << "LoadFile test passed." << std::endl;
 
-        // Test saveRecipeToFile and deleteFile
+        // Test saveRecipeToFile
         Recipe testRecipe;
         testRecipe.setFilename(tempFilename);
         testRecipe.setTitle("Test Recipe");

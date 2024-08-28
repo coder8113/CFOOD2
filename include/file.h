@@ -78,17 +78,7 @@ public:
      */
     static bool deleteFile(std::string filename);
 
-	/**
-	 * @brief Creates a temporary file with the specified content.
-	 * 
-	 * This function generates a unique temporary file, writes the provided 
-	 * content to it, and returns the filename of the created file.
-	 * 
-	 * @param content The content to write to the temporary file.
-	 * @return The name of the created temporary file.
-	 * @throws std::runtime_error If the temporary file cannot be created.
-	 */
-	std::string createTempFile(const std::string& content);
+	
 
 private:
     /**
