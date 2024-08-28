@@ -26,13 +26,10 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
-    - name: Install .NET SDK
-      uses: actions/setup-dotnet@v3
+    - name: Install Visual Studio Build Tools
+      uses: microsoft/setup-msbuild@v1
       with:
-        dotnet-version: '7.x'  # Use the appropriate version of the .NET SDK
-
-    - name: Install Test Platform Tools
-      run: dotnet tool install --global dotnet-vstest
+        vs-version: 'latest'
 
     - name: Install OpenCppCoverage
       run: |
@@ -43,8 +40,8 @@ jobs:
       shell: cmd
       working-directory: ${{github.workspace}}/build
       run: |
-        # Assuming the test executable is `tests.exe`
-        OpenCppCoverage --modules Debug --export_type cobertura:coverage.xml -- "dotnet" vstest tests.exe
+        set "VSTEST_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\PublicAssemblies"
+        OpenCppCoverage --modules Debug --export_type cobertura:coverage.xml -- "%VSTEST_PATH%\vstest.console.exe" tests.exe
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
