@@ -1,4 +1,6 @@
 #include "./Parser.h"
+#include <cassert>
+#include <iostream>
 
 Parser::Parser(std::string data, std::string filename) {
 	m_Span.data = data;
@@ -249,7 +251,71 @@ std::string Parser::pop() {
 	return result;
 }
 
-void Parser::unittest(){
-    Parser parser();
+void Parser::unittest() {
+    // Sample data simulating a recipe file
+    std::string sampleRecipeData = R"(
+# Recipe Title
+Pasta
 
+## ingredients
+* 200 gram pasta
+* 1 tablespoon olive oil
+* 3 cups water
+* salt to taste
+
+## instructions
+1. Boil the water.
+2. Add pasta and cook until tender.
+3. Drain the water and mix with olive oil.
+4. Add salt to taste.
+
+## remarks
+This recipe is best served fresh.
+)";
+
+    // Create the Parser object with the sample data
+    Parser parser(sampleRecipeData, "sample_recipe.txt");
+
+    // Call Parse method to process the recipe
+    parser.Parse();
+
+    // Retrieve the parsed recipe
+    Recipe* recipe = parser.getReceipe();
+
+    // Test if the recipe title is correctly parsed
+    assert(recipe->title == "Pasta");
+    std::cout << "Title test passed." << std::endl;
+
+    // Test if the ingredients are correctly parsed
+    assert(recipe->ingredients.size() == 4);
+    assert(recipe->ingredients[0].value == 200);
+    assert(recipe->ingredients[0].measurement == Recipe::gram);
+    assert(recipe->ingredients[0].ingredient == "pasta");
+
+    assert(recipe->ingredients[1].value == 1);
+    assert(recipe->ingredients[1].measurement == Recipe::tablespoon);
+    assert(recipe->ingredients[1].ingredient == "olive oil");
+
+    assert(recipe->ingredients[2].value == 3);
+    assert(recipe->ingredients[2].measurement == Recipe::cup);
+    assert(recipe->ingredients[2].ingredient == "water");
+
+    assert(recipe->ingredients[3].value == -1);  // -1 for "salt to taste"
+    assert(recipe->ingredients[3].measurement == Recipe::other);
+    assert(recipe->ingredients[3].ingredient == "salt to taste");
+    std::cout << "Ingredients test passed." << std::endl;
+
+    // Test if the instructions are correctly parsed
+    assert(recipe->instructions.size() == 4);
+    assert(recipe->instructions[0] == "Boil the water.");
+    assert(recipe->instructions[1] == "Add pasta and cook until tender.");
+    assert(recipe->instructions[2] == "Drain the water and mix with olive oil.");
+    assert(recipe->instructions[3] == "Add salt to taste.");
+    std::cout << "Instructions test passed." << std::endl;
+
+    // Test if the remarks are correctly parsed
+    assert(recipe->remarks == "This recipe is best served fresh.");
+    std::cout << "Remarks test passed." << std::endl;
+
+    std::cout << "All tests passed." << std::endl;
 }

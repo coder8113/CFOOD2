@@ -1,4 +1,7 @@
 #include "./file.h"
+#include <cassert>
+#include <iostream>
+
 /*
 adapted from
 https://stackoverflow.com/questions/2314542/listing-directory-contents-using-c-and-windows
@@ -145,6 +148,6 @@ std::string file::wcharToString(const wchar_t* wstr) {
     return converter.to_bytes(wide_str);
 }
 
-void file::unittest(){
-	
+void file::unittest() {
+    
 }

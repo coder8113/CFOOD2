@@ -1,4 +1,6 @@
 #include "./Recipe.h"
+#include <cassert>
+#include <iostream>
 
 Recipe::Recipe() 
 {
@@ -268,7 +270,130 @@ std::vector<std::string> Recipe::toStringArray()
 	return result;
 }
 
-void Recipe::unittest(){
-	
+void Recipe::unittest() {
+    // Create a Recipe object
+    Recipe recipe;
+
+    // Test setting and getting title
+    recipe.setTitle("Spaghetti Carbonara");
+    assert(recipe.title == "Spaghetti Carbonara");
+    std::cout << "Title test passed." << std::endl;
+
+    // Test adding ingredients
+    recipe.addIngredient(200, Recipe::gram, "spaghetti");
+    recipe.addIngredient(100, Recipe::gram, "pancetta");
+    recipe.addIngredient(2, Recipe::tablespoon, "olive oil");
+    recipe.addIngredient(1, Recipe::cup, "parmesan cheese");
+    recipe.addIngredient(-1, Recipe::other, "salt and pepper to taste");
+
+    assert(recipe.ingredients.size() == 5);
+    assert(recipe.ingredients[0].value == 200);
+    assert(recipe.ingredients[0].measurement == Recipe::gram);
+    assert(recipe.ingredients[0].ingredient == "spaghetti");
+
+    assert(recipe.ingredients[1].value == 100);
+    assert(recipe.ingredients[1].measurement == Recipe::gram);
+    assert(recipe.ingredients[1].ingredient == "pancetta");
+
+    assert(recipe.ingredients[2].value == 2);
+    assert(recipe.ingredients[2].measurement == Recipe::tablespoon);
+    assert(recipe.ingredients[2].ingredient == "olive oil");
+
+    assert(recipe.ingredients[3].value == 1);
+    assert(recipe.ingredients[3].measurement == Recipe::cup);
+    assert(recipe.ingredients[3].ingredient == "parmesan cheese");
+
+    assert(recipe.ingredients[4].value == -1);
+    assert(recipe.ingredients[4].measurement == Recipe::other);
+    assert(recipe.ingredients[4].ingredient == "salt and pepper to taste");
+
+    std::cout << "Ingredients test passed." << std::endl;
+
+    // Test adding instructions
+    recipe.addInstruction("Boil spaghetti in salted water.");
+    recipe.addInstruction("Fry pancetta in olive oil.");
+    recipe.addInstruction("Mix spaghetti with pancetta and cheese.");
+    recipe.addInstruction("Season with salt and pepper.");
+
+    assert(recipe.instructions.size() == 4);
+    assert(recipe.instructions[0] == "Boil spaghetti in salted water.");
+    assert(recipe.instructions[1] == "Fry pancetta in olive oil.");
+    assert(recipe.instructions[2] == "Mix spaghetti with pancetta and cheese.");
+    assert(recipe.instructions[3] == "Season with salt and pepper.");
+
+    std::cout << "Instructions test passed." << std::endl;
+
+    // Test adding instructions at specific positions
+    recipe.addInstructionAt("Heat olive oil.", 1);
+    assert(recipe.instructions.size() == 5);
+    assert(recipe.instructions[1] == "Heat olive oil.");
+
+    // Test setting instructions at specific positions (if needed)
+    recipe.setInstructionAt("Prepare ingredients.", 0);
+    assert(recipe.instructions[0] == "Prepare ingredients.");
+
+    std::cout << "Instructions insertion test passed." << std::endl;
+
+    // Test setting and displaying remarks
+    recipe.setRemarks("Best served with a side salad.");
+    assert(recipe.remarks == "Best served with a side salad.");
+    std::cout << "Remarks test passed." << std::endl;
+
+    // Test toString method
+    std::string expectedString = 
+        "# Spaghetti Carbonara\n"
+        "## Ingredients\n"
+        "* 200 g spaghetti\n"
+        "* 100 g pancetta\n"
+        "* 2 tbsp olive oil\n"
+        "* 1 cup parmesan cheese\n"
+        "* salt and pepper to taste\n"
+        "\n"
+        "## Instructions\n"
+        "1. Prepare ingredients.\n"
+        "2. Heat olive oil.\n"
+        "3. Boil spaghetti in salted water.\n"
+        "4. Fry pancetta in olive oil.\n"
+        "5. Mix spaghetti with pancetta and cheese.\n"
+        "6. Season with salt and pepper.\n"
+        "\n"
+        "## Remarks\n"
+        "Best served with a side salad.\n";
+
+    assert(recipe.toString() == expectedString);
+    std::cout << "toString test passed." << std::endl;
+
+    // Test toStringArray method
+    std::vector<std::string> expectedArray = {
+        "Spaghetti Carbonara\n",
+        "Ingredients \n",
+        "  200 g spaghetti\n",
+        "  100 g pancetta\n",
+        "  2 tbsp olive oil\n",
+        "  1 cup parmesan cheese\n",
+        "  salt and pepper to taste\n",
+        "\n",
+        "Instructions\n",
+        "  1. Prepare ingredients.\n",
+        "  2. Heat olive oil.\n",
+        "  3. Boil spaghetti in salted water.\n",
+        "  4. Fry pancetta in olive oil.\n",
+        "  5. Mix spaghetti with pancetta and cheese.\n",
+        "  6. Season with salt and pepper.\n",
+        "\n",
+        "Remarks\n",
+        "Best served with a side salad."
+    };
+
+    std::vector<std::string> resultArray = recipe.toStringArray();
+    assert(resultArray.size() == expectedArray.size());
+    for (size_t i = 0; i < resultArray.size(); ++i) {
+        assert(resultArray[i] == expectedArray[i]);
+    }
+
+    std::cout << "toStringArray test passed." << std::endl;
+
+    std::cout << "All tests passed." << std::endl;
 }
+
 
