@@ -1,4 +1,7 @@
 #include "./file.h"
+#include <cassert>
+#include <iostream>
+
 /*
 adapted from
 https://stackoverflow.com/questions/2314542/listing-directory-contents-using-c-and-windows
@@ -145,6 +148,70 @@ std::string file::wcharToString(const wchar_t* wstr) {
     return converter.to_bytes(wide_str);
 }
 
-void file::unittest(){
-	
+std::string createTempFile(const std::string& content) {
+    static int fileCounter = 0;
+    std::string filename = "tempfile_" + std::to_string(fileCounter++) + ".txt";
+    std::ofstream outfile(filename);
+    if (!outfile) {
+        throw std::runtime_error("Error creating temporary file");
+    }
+    outfile << content;
+    outfile.close();
+    return filename;
+}
+
+void file::unittest() {
+    // Test create and delete file
+    try {
+        // Create a temporary file
+        std::string tempFilename = createTempFile("Test content");
+
+        // Test LoadFile
+        std::string content = LoadFile(tempFilename.c_str());
+        assert(content == "Test content");
+        std::cout << "LoadFile test passed." << std::endl;
+
+        // Test saveRecipeToFile and deleteFile
+        Recipe testRecipe;
+        testRecipe.setFilename(tempFilename);
+        testRecipe.setTitle("Test Recipe");
+        testRecipe.addIngredient(1, Recipe::teaspoon, "Salt");
+        testRecipe.addInstruction("Mix all ingredients.");
+
+        // Save the recipe to file
+        bool saved = saveRecipeToFile(&testRecipe);
+        assert(saved);
+        std::cout << "saveRecipeToFile test passed." << std::endl;
+
+        // Verify if file was saved correctly
+        std::string savedContent = LoadFile(tempFilename.c_str());
+        assert(savedContent.find("Test Recipe") != std::string::npos);
+        assert(savedContent.find("Salt") != std::string::npos);
+        assert(savedContent.find("Mix all ingredients.") != std::string::npos);
+
+        // Delete the file
+        bool deleted = deleteFile(tempFilename);
+        assert(deleted);
+        std::cout << "deleteFile test passed." << std::endl;
+
+        // Test ListDirectoryContents
+        std::vector<wchar_t*> fileTable;
+        ListDirectoryContents(&fileTable, L".");
+        
+        bool fileFound = false;
+        for (wchar_t* file : fileTable) {
+            std::string fileStr = wcharToString(file);
+            if (fileStr == tempFilename) {
+                fileFound = true;
+                break;
+            }
+        }
+        assert(!fileFound); // Ensure the temp file was deleted
+        std::cout << "ListDirectoryContents test passed." << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Exception occurred: " << e.what() << std::endl;
+    }
+
+    std::cout << "All tests passed." << std::endl;
 }
