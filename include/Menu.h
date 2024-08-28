@@ -1,3 +1,10 @@
+/**
+ * @file Menu.h
+ * @brief This file contains the definition of the Menu class, 
+ * which is responsible for the main program menu logic.
+ * 
+ *
+ */
 #pragma once
 
 #include <cstdint>
