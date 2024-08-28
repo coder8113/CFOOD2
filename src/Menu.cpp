@@ -114,7 +114,15 @@ void Menu::displayMainMenu()
     system("cls");
     updateScreenSize();
 
-    uint32_t LINES_RESERVED = 2;
+    uint32_t LINES_RESERVED = 3;
+    if (substring_to_search.size() == 0)
+    {
+        printf("\n");
+    }
+    else
+    {
+        printf("Search: %s\n", substring_to_search.c_str());
+    }
     printf("Recipes: \n");
 
     uint32_t i = topRow;
@@ -147,24 +155,58 @@ void Menu::selectRecipe()
     recipeToDisplay = recipesList->at(cursor);
 }
 
+void Menu::addLetterToSearch(char c)
+{
+    substring_to_search.push_back(c);
+    uint32_t index = Util::search_recipe_list(recipesList, substring_to_search);
+    if (index == -1)
+    {
+        return;
+    }
+    cursor = index;
+
+}
+
+void Menu::resetSearch()
+{
+    cursor = 0;
+    substring_to_search.clear();
+}
+
 void Menu::mainMenuCallBack(int vk)
 {
+    int VK_A = 0x41;
+    int VK_Z = 0x5A;
+    auto recipe_callback = [this](int value) {
+        this->recipeMenuCallBack(value);
+    };
     switch (vk) {
     case (VK_UP):
+        resetSearch();
         cursorUp();
         displayMainMenu();
         break;
     case (VK_DOWN):
+        resetSearch();
         cursorDown();
         displayMainMenu();
         break;
     case (VK_RETURN):
+        resetSearch();
         selectRecipe();
-        auto callback = [this](int value) {
-            this->recipeMenuCallBack(value);
-        };
-        EventListener::setCallback(callback);
+        EventListener::setCallback(recipe_callback);
         displayRecipe();
+        break;
+    case (VK_BACK):
+        resetSearch();
+        displayMainMenu();
+        break;
+    default:
+        if (VK_A <= vk && vk <= VK_Z)
+        {
+            addLetterToSearch(vk - VK_A + 'a');
+            displayMainMenu();
+        }
         break;
 
     }

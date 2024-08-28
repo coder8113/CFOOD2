@@ -8,6 +8,7 @@
 
 #include "Recipe.h"
 #include "EventListener.h"
+#include "Util.h"
 
 class Menu
 {
@@ -27,10 +28,14 @@ public:
 	void displayRecipe();
 	void recipeMenuCallBack(int vk);
 
+	void addLetterToSearch(char c);
+
 	void selectRecipe();
 
 	void cursorUp();
 	void cursorDown();
+
+	void resetSearch();
 
 	uint32_t printLineLeftJustified(std::string line, uint32_t indent);
 
@@ -42,6 +47,8 @@ private:
 
 	HWND window;
 	HANDLE output_handle;
+
+	std::string substring_to_search;
 
 	std::vector<Recipe*>* recipesList;
 	Recipe* recipeToDisplay = NULL;

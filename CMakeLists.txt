@@ -21,6 +21,7 @@ add_executable(CFoodProject
     ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
     ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
     ${PROJECT_SOURCE_DIR}/src/Menu.cpp
+    ${PROJECT_SOURCE_DIR}/src/Util.cpp
 )
 
 # Define the test executable
@@ -31,6 +32,7 @@ add_executable(tests
     ${PROJECT_SOURCE_DIR}/src/Recipe.cpp
     ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
     ${PROJECT_SOURCE_DIR}/src/Menu.cpp
+    ${PROJECT_SOURCE_DIR}/src/Util.cpp
 )
 
 # Add tests
