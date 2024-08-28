@@ -31,14 +31,27 @@ jobs:
       with:
         vs-version: 'latest'
         
+    - name: Create Registry Key for Visual Studio Path
+      shell: pwsh
+      run: |
+        # PowerShell script to create the registry key and value
+        $registryPath = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0"
+        $keyExists = Test-Path $registryPath
+        
+        if (-not $keyExists) {
+          New-Item -Path $registryPath -Force
+          New-ItemProperty -Path $registryPath -Name "ShellFolder" -Value "C:\Program Files (x86)\Microsoft Visual Studio 14.0" -PropertyType String -Force
+        }
+
     - name: Find Visual Studio Path and vstest.console.exe
-      shell: cmd
+      shell: pwsh
       id: find_vstest
       run: |
-        set VS_PATH="C:\ProgramData\Chocolatey\bin\vswhere.exe -products * -requires Microsoft.Component.MSBuild -property installationPath -latest"
-        echo Found Visual Studio at: %VS_PATH%
-        dir "%VS_PATH%\Common7\IDE\PublicAssemblies\vstest.console.exe"
-        echo "##vso[task.setvariable variable=VS_PATH]%VS_PATH%"
+        # Use vswhere to find the installation path
+        $vswherePath = "C:\ProgramData\Chocolatey\bin\vswhere.exe"
+        $vsPath = & $vswherePath -products * -requires Microsoft.Component.MSBuild -property installationPath -latest
+        Write-Host "Found Visual Studio at: $vsPath"
+        Write-Host "##vso[task.setvariable variable=VS_PATH]$vsPath"
 
     - name: Generate Coverage Report
       shell: cmd
