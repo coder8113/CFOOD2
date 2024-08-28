@@ -68,6 +68,8 @@ public:
 
 	void Display();
 	std::string toString();
+
+	std::vector<std::string> toStringArray();
 private:
 	void DisplayIngredient(struct Ingredient ingredient);
 };

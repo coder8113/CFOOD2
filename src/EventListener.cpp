@@ -6,24 +6,23 @@ void EventListener::MainLoop()
 	{
 		if (GetAsyncKeyState(VK_DOWN) & 0x8000) 
 		{
-			std::cout << "Down key is pressed.\n";
-			continue;
+			callback(VK_DOWN);
 		}
 
 		if (GetAsyncKeyState(VK_UP) & 0x8000) 
 		{
-			std::cout << "Up key is pressed\n";
-			continue;
+			callback(VK_UP);
 		}
 
 		if (GetAsyncKeyState(VK_RETURN) & 0x8000) 
 		{
-			std::cout << "Enter key is pressed\n";
-			continue;
+			callback(VK_RETURN);
 		}
 
 
-		Sleep(75);
+		Sleep(120);
 	}
 
 }
+
+std::function<void(int)> EventListener::callback;

@@ -5,11 +5,6 @@ void Menu::Display()
 
 }
 
-void Menu::setRecipes(std::vector<Recipe*>* recipeList)
-{
-    recipes = recipeList;
-}
-
 void Menu::printSize()
 {
     updateScreenSize();
@@ -48,10 +43,11 @@ bool Menu::updateScreenSize()
     return true;
 }
 // todo: there must be a better way
-uint32_t Menu::printLine(std::string line)
+uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
 {
     if (line.size() < cols)
     {
+        printIndent(indent);
         printf("%s\n", line.c_str());
         return 1;
     }
@@ -65,6 +61,7 @@ uint32_t Menu::printLine(std::string line)
     {
         if (base_index + span == line.size())
         {
+            printIndent(indent);
             printf("%s\n", line.substr(base_index, span).c_str());
 
             return rows_printed;
@@ -74,6 +71,7 @@ uint32_t Menu::printLine(std::string line)
         {
             if (last_white_space_offset != 0)
             {
+                printIndent(indent);
                 printf("%s\n", line.substr(base_index, last_white_space_offset).c_str());
 
                 base_index += last_white_space_offset;
@@ -82,6 +80,7 @@ uint32_t Menu::printLine(std::string line)
             }
             else
             {
+                printIndent(indent);
                 printf("%s-\n", line.substr(base_index, span).c_str());
 
                 base_index += span;
@@ -98,5 +97,98 @@ uint32_t Menu::printLine(std::string line)
         span++;
     }
    
+
+}
+
+void Menu::printIndent(uint32_t indent=0)
+{
+    for (uint32_t i = 0; i < indent; i++)
+    {
+        printf(" ");
+    }
+}
+
+
+void Menu::displayMainMenu()
+{
+    system("cls");
+    updateScreenSize();
+
+    uint32_t LINES_RESERVED = 2;
+    printf("Recipes: \n");
+
+    uint32_t i = topRow;
+    while(i < topRow + cols - LINES_RESERVED && i < recipesList->size())
+    {
+        if (i == cursor)
+        {
+            printLineLeftJustified("> " + recipesList->at(i)->title, 2);
+        }
+        else 
+        {
+            printLineLeftJustified(recipesList->at(i)->title, 4);
+        }
+        i++;
+    }
+}
+
+void Menu::cursorUp()
+{
+    cursor -= cursor != 0 ? 1 : 0;
+}
+
+void Menu::cursorDown()
+{
+    cursor += cursor != recipesList->size() - 1 ? 1 : 0;
+}
+
+void Menu::selectRecipe()
+{
+    recipeToDisplay = recipesList->at(cursor);
+}
+
+void Menu::mainMenuCallBack(int vk)
+{
+    switch (vk) {
+    case (VK_UP):
+        cursorUp();
+        displayMainMenu();
+        break;
+    case (VK_DOWN):
+        cursorDown();
+        displayMainMenu();
+        break;
+    case (VK_RETURN):
+        selectRecipe();
+        auto callback = [this](int value) {
+            this->recipeMenuCallBack(value);
+        };
+        EventListener::setCallback(callback);
+        displayRecipe();
+        break;
+
+    }
+
+}
+
+void Menu::recipeMenuCallBack(int vk)
+{
+    return;
+}
+
+void Menu::displayRecipe()
+{
+    system("cls");
+    if (!recipeToDisplay)
+    {
+        return;
+    }
+
+    std::vector<std::string> recipe = recipeToDisplay->toStringArray();
+
+    for (std::string line : recipe)
+    {
+        printLineLeftJustified(line, 0);
+    }
 
 }

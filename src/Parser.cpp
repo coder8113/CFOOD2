@@ -48,7 +48,6 @@ void Parser::Parse()
 		}
 		advance();
 	}
-	printf("\n\n\n\n");
 }
 
 /**

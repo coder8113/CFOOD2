@@ -216,3 +216,57 @@ std::string Recipe::toString()
 	result += remarks;
 	return result;
 }
+
+std::vector<std::string> Recipe::toStringArray()
+{
+	std::vector<std::string> result;
+
+	// title
+	result.push_back(title+"\n");
+
+	// ingredients
+	result.push_back("Ingredients \n");
+
+	for (Ingredient ingredient : ingredients)
+	{
+		if (ingredient.measurement == other)
+		{
+			result.push_back("  " + ingredient.ingredient);
+		}
+		else
+		{
+			std::string ingredientName = "  ";
+			ingredientName += std::to_string(ingredient.value);
+			ingredientName += measurementToString(ingredient.measurement);
+			ingredientName += " ";
+			ingredientName += ingredient.ingredient;
+			result.push_back(ingredientName);
+		}
+
+	}
+
+	// instructions
+	result.push_back("\nInstructions\n");
+
+	int i = 1;
+	for (std::string instruction : instructions)
+	{
+		std::string newStr = "  ";
+		newStr += std::to_string(i);
+		newStr += ". ";
+		newStr += instruction;
+		result.push_back(newStr);
+		i++;
+	}
+
+	if (!remarks.empty())
+	{
+		result.push_back("\nRemarks\n");
+		result.push_back(remarks);
+
+	}
+	return result;
+}
+
+
+

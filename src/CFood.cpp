@@ -14,6 +14,7 @@
 #include <stdlib.h> 
 #include <stdio.h> 
 #include <string.h> 
+#include <functional>
 
 #include <locale>
 #include <codecvt>
@@ -60,12 +61,15 @@ int main()
    
 
     std::vector<Recipe*> recipes = file::loadAllRecipes(L"Recipes");
-    recipes.at(0)->Display();
-
 
     Menu menu;
-    menu.printSize();
-    menu.printLine("very long string which should be properly left-justified.");
+    menu.setRecipeList(&recipes);
+    menu.displayMainMenu();
+    
+    auto callback = [&menu](int value) {
+        menu.mainMenuCallBack(value);
+    };
 
+    EventListener::setCallback(callback);
     EventListener::MainLoop();
 }
