@@ -3,15 +3,18 @@
  *
  * @section intro_sec Introduction
  *
- * Welcome to the C-Food! This application is designed to help users manage and explore recipes in an intuitive and interactive way. 
+ * Welcome to the C-Food! This application is designed to help users manage and explore recipes in an intuitive and interactive way. C-Food is a command-line virtual recipe book. 
+ * The app comes prepackaged with common recipes and some of our favourites. We plan on having a searchable index of recipes. Users will be able to search for a recipe based on: 
+ * the recipe title, category tags, and the ingredients. We will also include the ability to add, edit and delete recipes, serving size adjustments, and unit conversions.
  *
  * @section features_sec Features
- *
+ * -**Pre-packaged Recipes:** The C-food app comes pre-packaged with some of our favorite recipes, we hope you enjoy!
+ * -**Add Recipe:** The app also gives you the ability to add some of your favorites to the recipe library
+ * -**Search Recipe:** You can search through the recipes in your library using the search function
+ * -**Save/Delete:** You can save an delete recipes 
  * 
- * @section getting_started_sec Getting Started
- *
- * 
- *
+ * @section authors_sec Authors and Acknowledgements
+ * Robert Cresswell and Jennifer Puzey
  */
 
 
