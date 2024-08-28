@@ -16,5 +16,8 @@ This project is tested using Visual Studio Unit Testing framework. The code cove
 We will also make use of user testing to receive detailed feedback. The questionnaire for user testing can be found at the link below:
 https://docs.google.com/forms/d/e/1FAIpQLSeOQwSU76QZ_Z7YGtrS5bfv8pcEGBcakACQKb--Ga02E-lq9Q/viewform?usp=sf_link
 
+## Documentation
+Documentation for this project was produced using doxygen. Our site can be viewed at: https://codedocs.xyz/coder8113/CFOOD2/index.html
+
 ## Authors and acknowledgment
 Robert Cresswell and Jennifer Puzey
