@@ -37,5 +37,22 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
 
+    - name: Install OpenCppCoverage
+      run: |
+        choco install OpenCppCoverage
+        echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+
+    - name: Generate Coverage Report
+      shell: cmd
+      run: |
+        OpenCppCoverage --modules Debug --export_type cobertura:coverage.xml -- "vstest.console.exe" x64\Debug\winci-tests.dll
+
+    - name: Upload Report to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        fail_ci_if_error: true
+        files: coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+
             
 
