@@ -139,14 +139,6 @@ bool file::deleteFile(std::string filename)
     return false;
 }
 
-// this is because we list our directory contents as wchar_t*,
-// consider changing to wchar!
-std::string file::wcharToString(const wchar_t* wstr) {
-    std::wstring wide_str(wstr);
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    return converter.to_bytes(wide_str);
-}
-
 void file::unittest(){
 	
 }
