@@ -1,4 +1,6 @@
 #include "./file.h"
+#include "Util.h"
+
 /*
 adapted from
 https://stackoverflow.com/questions/2314542/listing-directory-contents-using-c-and-windows
@@ -64,7 +66,7 @@ std::vector<Recipe*> file::loadAllRecipes(const wchar_t* sDir)
     for (wchar_t* filename : filetable)
     {
         std::string file_contents = LoadFile(filename);
-        Parser parse(file_contents, wcharToString(filename));
+        Parser parse(file_contents, Util::toAnsi(filename));
         parse.Parse();
         result.push_back(parse.getReceipe());
     }
@@ -135,14 +137,6 @@ bool file::deleteFile(std::string filename)
     }
 
     return false;
-}
-
-// this is because we list our directory contents as wchar_t*,
-// consider changing to wchar!
-std::string file::wcharToString(const wchar_t* wstr) {
-    std::wstring wide_str(wstr);
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-    return converter.to_bytes(wide_str);
 }
 
 void file::unittest(){

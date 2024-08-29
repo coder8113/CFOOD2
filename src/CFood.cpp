@@ -20,16 +20,6 @@
 #include <locale>
 #include <codecvt>
 
-namespace util
-{
-    std::string wide_to_narrow(const wchar_t* wideStr) {
-        std::wstring wstr(wideStr);
-
-        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        return converter.to_bytes(wstr);
-    }
-}
-
 int main()
 {
 
@@ -53,7 +43,7 @@ int main()
     ////printf("%s\n", test.c_str());
 
     //Parser a = Parser(file::LoadFile(fileTable.at(0)), 
-    //    util::wide_to_narrow(fileTable.at(0)));
+    //    Util::toAnsi(fileTable.at(0)));
     //a.Parse();
     //Recipe* r = a.getReceipe();
     //r->Display();
