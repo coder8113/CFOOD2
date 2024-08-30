@@ -89,7 +89,6 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
                 rows_printed++;
             }
         }
-
         if (isspace(line.at(base_index + span)))
         {
             last_white_space_offset = span;
