@@ -1,5 +1,7 @@
 # Chickpea Spinach Curry
+
 ## Ingredients
+
 * 1 medium white onion
 * 6 cloves of garlic
 * 1 tsp coriander seeds
@@ -16,6 +18,7 @@
 * 250 g tofu
 
 ## Instructions
+
 1. Toast the whole spices in a dry pan for 30 seconds
 2. Crush the whole spices, then add back to the pan with 3 tbsp of olive oil
 3. When hot, add the onion and fry off for 8 minutes on medium heat, with a pinch of salt

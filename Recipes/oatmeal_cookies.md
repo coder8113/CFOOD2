@@ -1,5 +1,7 @@
 # Oatmeal Chocolate Chip Cookies
+
 ## Ingredients
+
 * 1 cup all-purpose flour
 * 1/2 tsp baking soda
 * 1/2 tsp salt
@@ -12,6 +14,7 @@
 * 1 cup semisweet chocolate chips
 
 ## Instructions
+
 1. Preheat oven to 375 degrees 
 2. Mix dry ingredients together in a large bowl
 3. Combine butter and sugar, beat
