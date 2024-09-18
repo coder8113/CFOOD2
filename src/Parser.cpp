@@ -252,12 +252,63 @@ std::string Parser::pop() {
 }
 
 void Parser::unittest() {
+	std::cout << "Testing parser" << std::endl;
+	std::string test_data =
+		"# TITLE\n"
+		"## Ingredients\n"
+		"* 200g test\n"
+		"* 1 teaspoon test\n"
+		"* 1 tablespoon test\n"
+		"* 1 cup test\n"
+		"* 1 pint test\n"
+		"* 1 quart test \n"
+		"* 1 gallon test \n"
+		"* 1 ounce test \n"
+		"* 1 pound test \n"
+		"* 1 gram test\n"
+		"* 1 kilogram test\n"
+		"* 1 fl oz test\n"
+		"## Instructions\n"
+		"1. test_this\n"
+		"## Remarks\n"
+		"remark\n";
+
+	Parser titleTest(test_data, "file");
 	
+	titleTest.Parse();
+	Recipe* test_recipe = titleTest.getReceipe();
+	assert(test_recipe->title == "TITLE");
+
+	assert(test_recipe->ingredients.at(0).value = 200);
+	assert(test_recipe->ingredients.at(0).measurement = Recipe::gram);
+	assert(test_recipe->ingredients.at(0).ingredient == "test");
+
+	std::cout << test_recipe->ingredients.size() << std::endl;
+	
+	std::cout << "Parse: teaspoon test." << std::endl;
+	assert(test_recipe->ingredients.at(1).measurement == Recipe::teaspoon);
+	std::cout << "Parse: tablespoon test." << std::endl;
+	assert(test_recipe->ingredients.at(2).measurement == Recipe::tablespoon);
+	std::cout << "Parse: cup test." << std::endl;
+	assert(test_recipe->ingredients.at(3).measurement == Recipe::cup);
+	std::cout << "Parse: pint test." << std::endl;
+	assert(test_recipe->ingredients.at(4).measurement == Recipe::pint);
+	std::cout << "Parse: quartz test." << std::endl;
+	assert(test_recipe->ingredients.at(5).measurement == Recipe::quarts);
+	std::cout << "Parse: gallon test." << std::endl;
+	assert(test_recipe->ingredients.at(6).measurement == Recipe::gallon);
+	std::cout << "Parse: ounce test." << std::endl;
+	assert(test_recipe->ingredients.at(7).measurement == Recipe::ounce);
+	std::cout << "Parse: pound test." << std::endl;
+	assert(test_recipe->ingredients.at(8).measurement == Recipe::pound);
+	std::cout << "Parse: gram test." << std::endl;
+	assert(test_recipe->ingredients.at(9).measurement == Recipe::gram);
+	std::cout << "Parse: kilogram test." << std::endl;
+	assert(test_recipe->ingredients.at(10).measurement == Recipe::kilogram);
 
 
-	Parser parser();
-
-
-
+	std::cout << test_recipe->remarks << std::endl;
+	assert(test_recipe->instructions[0] == "test_this");
+	//assert(test_recipe->remarks == "remark"); // Remarks not yet implemented.
 
 }
