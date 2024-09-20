@@ -14,7 +14,7 @@
 
 ## Instructions
 
-1. Heat up some oil on medium heat. Add the garlic and sauté for 30 seconds.
+1. Heat up some oil on medium heat. Add the garlic and saute for 30 seconds.
 2. Add the spices, salt n pepper, sundried tomatoes & tomato paste. Mix and cook down for 1 minute.
 3. Add the chickpeas, broth & coconut milk. Season with salt and pepper. Let it simmer for 5 minutes.
 4. Add in the spinach and stir until its wilted.

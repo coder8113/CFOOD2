@@ -17,10 +17,11 @@
 ## Instructions
 
 1. Peel and chop your squash and potato, then parboil for 6-8 mins or until a fork goes through easily
-make a roux by melting butter in a frying pan, then whisking in flour, adding the plant milk little by little. Add spices, salt, pepper and marmite, bring to a simmer and then stir constantly as it’s thickening.
+make a roux by melting butter in a frying pan, then whisking in flour, adding the plant milk little by little. Add spices, salt, pepper and marmite, bring to a simmer and then stir constantly as it's thickening.
 2. Turn off the heat, stir in the white vinegar or lemon juice and leave to cool.
 3. Put your pasta on to cook, make sure to cook it 1 min less than the packet instructions and reserve 1/2 a cup of the salty pasta water.
 4. When the sauce has cooled, add to a blender with the squash and potato. Blend with the pasta water.
 5. Taste and adjust seasoning.
 6. Pour the sauce over the cooked pasta, top with breadcrumbs (make sure to oil them first and add a little salt) and bake until golden and crispy. Enjoy
+
 
