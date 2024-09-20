@@ -214,6 +214,16 @@ void Menu::mainMenuCallBack(int vk)
 
 void Menu::recipeMenuCallBack(int vk)
 {
+    auto callback = [this](int value) {
+        mainMenuCallBack(value);
+    };
+
+    if (vk == VK_BACK)
+    {
+        EventListener::setCallback(callback);
+        displayMainMenu();
+
+    }
     return;
 }
 

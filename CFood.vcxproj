@@ -129,7 +129,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Desktop\CFOOD2SUNDAY\CFOOD2\include\tests.h" />
     <ClInclude Include="include\EventListener.h" />
     <ClInclude Include="include\file.h" />
     <ClInclude Include="include\Menu.h" />
@@ -138,7 +137,6 @@
     <ClInclude Include="include\Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Desktop\CFOOD2SUNDAY\CFOOD2\src\tests.cpp" />
     <ClCompile Include="src\CFood.cpp" />
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\file.cpp" />
