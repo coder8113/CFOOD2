@@ -62,7 +62,7 @@
 
 ## Instructions
 
-1. Preheat oven to 200°C/390°F. Add the cauliflower and onion on a baking tray and add the olive oil and seasonings, and toss to coat.
+1. Preheat oven to 200C/390F. Add the cauliflower and onion on a baking tray and add the olive oil and seasonings, and toss to coat.
 2. Add the chickpeas on a separate lined baking tray and add the olive oil and seasonings, and toss to coat.
 3. Place the trays in the oven (chickpeas on the bottom rack) and bake for 35 minutes.
 4. In the meantime, add the hummus ingredients to a blender or food processor and blend until smooth and creamy. Combine the salad ingredients in a bowl.

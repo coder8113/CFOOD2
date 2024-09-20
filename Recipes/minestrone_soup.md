@@ -30,3 +30,4 @@ Pour in the diced tomatoes and their juices, broth and water. Add the salt, bay 
 3. Raise heat to medium-high and bring the mixture to a boil, then partially cover the pot with the lid, leaving about a 1" gap for steam to escape. Reduce heat as necessary to maintain a gentle simmer.
 4. Cook for 15 minutes, then remove the lid and add the pasta, beans and greens. Continue simmering, uncovered, for 20 minutes or until the the pasta is cooked al dente and the greens are tender.
 5. Remove the pot from the heat, then remove the bay leaves. Stir in the lemon juice and remaining tablespoon of olive oil. Taste and season with more salt (about 1/4 teaspoon more) and pepper until the flavors really sing. Garnish bowls of soup with grated Parmesan, if you'd like.
+

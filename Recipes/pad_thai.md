@@ -27,3 +27,4 @@
 2. Mix all ingredients for the Pad Thai sauce and set aside.
 3. Heat oil in a wok or large pan over high heat. Add the garlic and onion, and stir-fry until fragrant, about 30 seconds.Add the chicken and stir-fry until just cooked, then add the prawn tails and the white parts of the spring onion. Push everything to the side of the wok and pour in the beaten eggs.
 4. Scramble using a spatula or wooden spoon, then mix everything together.
+
