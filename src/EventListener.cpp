@@ -2,42 +2,32 @@
 
 void EventListener::MainLoop()
 {
-	while (true)
-	{
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000) 
-		{
-			callback(VK_DOWN);
-		}
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
 
-		if (GetAsyncKeyState(VK_UP) & 0x8000) 
-		{
-			callback(VK_UP);
-		}
+LRESULT CALLBACK EventListener::CaptureKeyboardEvent(int nCode, WPARAM wParam, LPARAM lParam) {
+	if (nCode == HC_ACTION) {
+		KBDLLHOOKSTRUCT* pKeyboard = (KBDLLHOOKSTRUCT*)lParam;
 
-		if (GetAsyncKeyState(VK_RETURN) & 0x8000) 
-		{
-			callback(VK_RETURN);
-		}
-
-		if (GetAsyncKeyState(VK_BACK) & 0x8000)
-		{
-			callback(VK_BACK);
-		}
 		
-		int VK_A = 0x41;
-		int VK_Z = 0x5A;
-		for (int vk_letter = 0x41; vk_letter <= VK_Z; vk_letter++)
-		{
-			if (GetAsyncKeyState(vk_letter) & 0x8000)
-			{
-				callback(vk_letter);
+		if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+			// if key press, pass the vkcall on
+			callback(pKeyboard->vkCode);
+
+			// Exit program
+			if (pKeyboard->vkCode == VK_ESCAPE) {
+				PostQuitMessage(0); 
 			}
 		}
-
-
-		Sleep(60);
 	}
-
+	
+	return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
+
+
 
 std::function<void(int)> EventListener::callback;

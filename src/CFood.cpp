@@ -62,5 +62,18 @@ int main()
     };
 
     EventListener::setCallback(callback);
+
+    HHOOK hhkLowLevelKybd = SetWindowsHookEx(WH_KEYBOARD_LL, EventListener::CaptureKeyboardEvent, 0, 0);
+
+    if (hhkLowLevelKybd == NULL) {
+        std::cerr << "Failed to install hook!" << std::endl;
+        return 1;
+    }
+
+    // Enter message loop to keep the hook active
     EventListener::MainLoop();
+
+    // Unhook when done
+    UnhookWindowsHookEx(hhkLowLevelKybd);
+
 }

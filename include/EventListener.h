@@ -16,10 +16,17 @@ class EventListener
 {
 public:
     /**
-     * @brief Starts the main event loop. This function continuously listens for events
+     * @brief Starts the main event loop. This function handles dispatching windows messages.
      * and calls the registered callback when an event occurs.
      */
     static void MainLoop();
+
+    /**
+    * @brief Hook procedure to capture windows keypresses. This will pass
+    * the pressed vk and run the callback routine.
+    */
+    static LRESULT CALLBACK CaptureKeyboardEvent(int nCode, WPARAM wParam, LPARAM lParam);
+
 
     /**
      * @brief Sets the callback function that will be called when an event is detected.
