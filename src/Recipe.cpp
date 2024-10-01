@@ -63,6 +63,10 @@ void Recipe::setTitle(std::string title)
 	this->isSaved = false;
 }
 
+void Recipe::setTags(std::vector<std::string> tags) {
+	this->tags = tags;
+}
+
 void Recipe::addIngredient(uint32_t value, Measurement_e measurement, std::string ingredientName)
 {
 	Ingredient newIngredient

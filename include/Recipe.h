@@ -58,6 +58,9 @@ public:
     std::string title;              /**< The title of the recipe. */
     void setTitle(std::string title);
 
+    std::vector<std::string> tags;
+    void setTags(std::vector<std::string> tags);
+
     uint32_t servings;              /**< The number of servings the recipe yields. */
 
     std::vector<Ingredient> ingredients; /**< A vector storing the ingredients for the recipe. */
