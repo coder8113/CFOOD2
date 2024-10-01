@@ -1,5 +1,7 @@
 # Vegan Carrot Cake
 
+## Vegan, Dessert
+
 ## Ingredients
 
 * 2 1/4 cups wholemeal flour

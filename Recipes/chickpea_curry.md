@@ -1,5 +1,7 @@
 # Chickpea Spinach Curry
 
+## Vegetarian, Dinner
+
 ## Ingredients
 
 * 1 medium white onion
