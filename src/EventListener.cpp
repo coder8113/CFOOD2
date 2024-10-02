@@ -13,14 +13,17 @@ LRESULT CALLBACK EventListener::CaptureKeyboardEvent(int nCode, WPARAM wParam, L
 	if (nCode == HC_ACTION) {
 		KBDLLHOOKSTRUCT* pKeyboard = (KBDLLHOOKSTRUCT*)lParam;
 
-		
-		if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
-			// if key press, pass the vkcall on
-			callback(pKeyboard->vkCode);
+		if (GetForegroundWindow() == GetConsoleWindow()) {
 
-			// Exit program
-			if (pKeyboard->vkCode == VK_ESCAPE) {
-				PostQuitMessage(0); 
+
+			if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+				// if key press, pass the vkcall on
+				callback(pKeyboard->vkCode);
+
+				// Exit program
+				if (pKeyboard->vkCode == VK_ESCAPE) {
+					PostQuitMessage(0);
+				}
 			}
 		}
 	}
