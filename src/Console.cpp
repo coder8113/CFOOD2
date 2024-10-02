@@ -75,13 +75,13 @@ void Console::PutChar(CHAR ch)
 {
 	if (ch == '\n')
 	{
-		while (cursor.X < width)
+		while (cursor.X <= width)
 		{
 			buffer[cursor.X + cursor.Y * width].Char.UnicodeChar = ' ';
 			buffer[cursor.X + cursor.Y * width].Attributes = this->attributes;
 			cursor.X++;
 		}
-		cursor.X = 0;
+		cursor.X = indent;
 		cursor.Y++;
 		return;
 	}
@@ -93,7 +93,7 @@ void Console::PutChar(CHAR ch)
 		// Move the cursor to the next position
 		cursor.X++;
 		if (cursor.X >= width) {
-			cursor.X = 0;
+			cursor.X = indent;
 			cursor.Y++;
 		}
 		if (cursor.Y >= height) {
@@ -151,7 +151,7 @@ void Console::Clear()
 		this->buffer[i].Attributes = this->attributes;
 	}
 
-	cursor = { 0, 0 };
+	cursor = { indent, 0 };
 }
 
 void Console::SetTitle(LPCSTR title)
@@ -162,4 +162,9 @@ void Console::SetTitle(LPCSTR title)
 void Console::SetAttribute(WORD attribute)
 {
 	attributes = attribute;
+}
+
+void Console::SetIndent(SHORT i)
+{
+	indent = i;
 }

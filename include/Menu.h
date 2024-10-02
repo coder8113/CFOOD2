@@ -31,6 +31,8 @@ public:
      */
     static void unittest();
 
+    void DisplaySplash();
+
     /**
      * @brief Sets the list of recipes for the menu to display.
      * 

@@ -37,6 +37,7 @@ public:
 	void Clear();
 	void SetTitle(LPCSTR title);
 	void SetAttribute(WORD attribute);
+	void SetIndent(SHORT i);
 
 	SHORT getWidth() { return width;  }
 	SHORT getHeight() { return height;  }
@@ -54,4 +55,5 @@ private:
 	WORD attributes;
 	SHORT width;
 	SHORT height;
+	SHORT indent;
 };

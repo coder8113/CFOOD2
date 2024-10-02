@@ -4,6 +4,34 @@
 Menu::Menu()
 {
     console = new Console();
+    console->SetTitle("CFOOD2");
+    DisplaySplash();
+}
+
+void Menu::DisplaySplash()
+{
+    SHORT padding = (console->getWidth() - 74) / 2;
+    console->SetIndent(padding);
+    console->SetAttribute(FOREGROUND_BLUE);
+    std::string splash =
+        "\n"
+        " .d8888b.         8888888888 .d88888b.   .d88888b.  8888888b.   .d8888b.\n"
+        "d88P  Y88b        888       d88P   Y88b d88P   Y88b 888   Y88b d88P  Y88b\n"
+        "888    888        888       888     888 888     888 888    888        888\n"
+        "888               8888888   888     888 888     888 888    888     .d88P\n"
+        "888         8888  888       888     888 888     888 888    888 .od888P\n"
+        "888    888        888       888     888 888     888 888    888  d88P\n"
+        "Y88b  d88P        888       Y88b..d88P  Y88b..d88P  888.d88P   888\n"
+        " Y8888P           888        Y88888P     Y88888P    888888P    888888888\n"
+        "\n"
+        "                  By Jennifer Puzey and Robert Cresswell                 \n"
+        "         Special thanks to Boris Trifkovic for his contributions.        \n";
+    console->PutString(splash);
+    console->Print();
+    Sleep(1500);
+    console->SetIndent(0);
+    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    console->Clear();
 }
 
 bool Menu::updateScreenSize()
