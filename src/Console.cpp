@@ -75,7 +75,7 @@ void Console::PutChar(CHAR ch)
 {
 	if (ch == '\n')
 	{
-		while (cursor.X <= width)
+		while (cursor.X < width)
 		{
 			buffer[cursor.X + cursor.Y * width].Char.UnicodeChar = ' ';
 			buffer[cursor.X + cursor.Y * width].Attributes = this->attributes;
