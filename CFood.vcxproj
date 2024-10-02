@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Console.h" />
     <ClInclude Include="include\EventListener.h" />
     <ClInclude Include="include\file.h" />
     <ClInclude Include="include\Menu.h" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CFood.cpp" />
+    <ClCompile Include="src\Console.cpp" />
     <ClCompile Include="src\EventListener.cpp" />
     <ClCompile Include="src\file.cpp" />
     <ClCompile Include="src\Menu.cpp" />

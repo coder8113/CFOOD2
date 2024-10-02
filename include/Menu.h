@@ -16,6 +16,7 @@
 #include "Recipe.h"
 #include "EventListener.h"
 #include "Util.h"
+#include "Console.h"
 
 /**
  * @brief The Menu class is responsible for handling the display and interaction with a menu system,
@@ -24,20 +25,11 @@
 class Menu
 {
 public:
+    Menu();
     /**
      * @brief Runs unit tests for the Menu class.
      */
     static void unittest();
-
-    /**
-     * @brief Displays the current menu or interface on the screen.
-     */
-    void Display();
-
-    /**
-     * @brief Prints the size of the menu or interface.
-     */
-    void printSize();
 
     /**
      * @brief Sets the list of recipes for the menu to display.
@@ -110,10 +102,12 @@ public:
     uint32_t printLineLeftJustified(std::string line, uint32_t indent);
 
 private:
-    uint32_t rows = 0;        /**< The number of rows in the display. */
-    uint32_t cols = 0;        /**< The number of columns in the display. */
-    uint32_t topRow = 0;      /**< The top row currently displayed. */
-    uint32_t cursor = 0;      /**< The current cursor position in the menu. */
+    Console* console;
+
+    SHORT rows = 0;        /**< The number of rows in the display. */
+    SHORT cols = 0;        /**< The number of columns in the display. */
+    SHORT topRow = 0;      /**< The top row currently displayed. */
+    SHORT cursor = 0;      /**< The current cursor position in the menu. */
 
     HWND window;              /**< The handle to the window. */
     HANDLE output_handle;     /**< The handle to the console output. */

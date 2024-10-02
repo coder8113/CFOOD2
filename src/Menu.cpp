@@ -1,47 +1,17 @@
 #include "./Menu.h"
 #include <iostream>
 
-void Menu::Display()
+Menu::Menu()
 {
-
+    console = new Console();
 }
-
-void Menu::printSize()
-{
-    updateScreenSize();
-    printf("rows: %d\n", rows);
-    printf("cols: %d\n", cols);
-
-}
-
 
 bool Menu::updateScreenSize()
 {
-    /* At this point, our process has a console window assigned to it */
-    window = GetConsoleWindow();
-    output_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    /* Grab the default size as given to us by the OS */
-    CONSOLE_SCREEN_BUFFER_INFO buffer_info;
-
-    if (!GetConsoleScreenBufferInfo(output_handle, &buffer_info)) {
-        return false;
-    }
-
-    /* Don't show the console cursor */
-    CONSOLE_CURSOR_INFO cursor_info;
-    cursor_info.dwSize = 1;
-    cursor_info.bVisible = false;
-
-    if (!SetConsoleCursorInfo(output_handle, &cursor_info)) {
-        return false;
-    }
-
-
-    cols = buffer_info.srWindow.Right - buffer_info.srWindow.Left;
-    rows = buffer_info.srWindow.Bottom - buffer_info.srWindow.Top;
-
+    cols = console->getWidth();
+    rows = console->getHeight();
     return true;
+
 }
 // todo: there must be a better way
 uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
@@ -49,7 +19,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
     if (line.size() < cols)
     {
         printIndent(indent);
-        printf("%s\n", line.c_str());
+        console->PutStringLn(line);
         return 1;
     }
 
@@ -63,7 +33,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
         if (base_index + span == line.size())
         {
             printIndent(indent);
-            printf("%s\n", line.substr(base_index, span).c_str());
+            console->PutStringLn(line.substr(base_index, span));
 
             return rows_printed;
         }
@@ -73,7 +43,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
             if (last_white_space_offset != 0)
             {
                 printIndent(indent);
-                printf("%s\n", line.substr(base_index, last_white_space_offset).c_str());
+                console->PutStringLn(line.substr(base_index, last_white_space_offset));
 
                 base_index += last_white_space_offset;
                 span = 0;
@@ -82,7 +52,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
             else
             {
                 printIndent(indent);
-                printf("%s-\n", line.substr(base_index, span).c_str());
+                console->PutStringLn("-"+line.substr(base_index, span));
 
                 base_index += span;
                 span = 0;
@@ -104,33 +74,39 @@ void Menu::printIndent(uint32_t indent=0)
 {
     for (uint32_t i = 0; i < indent; i++)
     {
-        printf(" ");
+        console->PutChar(' ');
     }
 }
 
 
 void Menu::displayMainMenu()
 {
-    system("cls");
-    updateScreenSize();
+    console->UpdateScreenSize();
+    console->Clear();
 
-    uint32_t LINES_RESERVED = 3;
+    uint32_t LINES_RESERVED = 4;
     if (substring_to_search.size() == 0)
     {
-        printf("\n");
+        console->PutChar('\n');
     }
     else
     {
-        printf("Search: %s\n", substring_to_search.c_str());
+        console->PutStringLn("Search: " + substring_to_search);
     }
-    printf("Recipes: \n");
+    console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
+    console->PutStringLn("Recipes:");
+    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    console->PutChar('\n');
 
     uint32_t i = topRow;
     while(i < topRow + cols - LINES_RESERVED && i < recipesList->size())
     {
         if (i == cursor)
         {
+            console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE);
             printLineLeftJustified("> " + recipesList->at(i)->title, 2);
+            console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+
         }
         else 
         {
@@ -138,6 +114,7 @@ void Menu::displayMainMenu()
         }
         i++;
     }
+    console->Print();
 }
 
 void Menu::cursorUp()
@@ -229,7 +206,7 @@ void Menu::recipeMenuCallBack(int vk)
 
 void Menu::displayRecipe()
 {
-    system("cls");
+    console->Clear();
     if (!recipeToDisplay)
     {
         return;
@@ -241,6 +218,7 @@ void Menu::displayRecipe()
     {
         printLineLeftJustified(line, 0);
     }
+    console->Print();
 
 }
 
@@ -276,10 +254,6 @@ void Menu::unittest(){
     std::cout << "Testing recipe selection" << std::endl;
     menu.selectRecipe();
     menu.displayRecipe(); // Expect the recipe details of the selected recipe to be displayed
-
-    // Test printSize (indirectly testing updateScreenSize)
-    std::cout << "Testing screen size printing" << std::endl;
-    menu.printSize(); // Should print the number of rows and columns in the console window
 
     // Test adding letters to search
     std::cout << "Testing search functionality" << std::endl;
