@@ -49,6 +49,8 @@ public:
         recipesList = recipes;
     }
 
+    
+
     /**
      * @brief Displays the main menu of the program.
      */

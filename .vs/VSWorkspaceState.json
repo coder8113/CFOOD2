@@ -5,6 +5,11 @@
       "out\\install\\x64-Debug"
     ]
   },
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\include",
+    "\\src"
+  ],
+  "SelectedNode": "\\src\\Util.cpp",
   "PreviewInSolutionExplorer": false
 }

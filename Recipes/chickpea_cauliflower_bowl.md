@@ -1,7 +1,8 @@
 # Chickpea Cauliflower Bowl
 
 ## Tags 
-Vegetarian, Lunch
+- Vegetarian
+- Lunch
 
 ## Ingredients
 

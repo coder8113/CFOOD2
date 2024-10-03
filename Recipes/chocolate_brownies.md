@@ -1,4 +1,7 @@
-# Chocalate Brownies
+# Chocolate Brownies
+
+## Tags
+- random
 
 ## Ingredients
 

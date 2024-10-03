@@ -1,5 +1,8 @@
 # Dal
 
+## Tags
+- random
+
 ## Ingredients
 
 * 1 red onion

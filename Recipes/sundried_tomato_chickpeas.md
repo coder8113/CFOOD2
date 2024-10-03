@@ -1,5 +1,8 @@
 # Sundried Tomato Chickpeas
 
+## Tags
+- chickpea
+
 ## Ingredients
 
 * 3 garlic cloves, minced

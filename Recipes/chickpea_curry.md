@@ -1,6 +1,8 @@
 # Chickpea Spinach Curry
 
-## Vegetarian, Dinner
+## Tags
+- Vegetarian
+- Dinner
 
 ## Ingredients
 

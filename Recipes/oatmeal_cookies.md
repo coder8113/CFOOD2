@@ -1,7 +1,7 @@
 # Oatmeal Chocolate Chip Cookies
 
 ## Tags
-Dessert
+- Dessert
 
 ## Ingredients
 

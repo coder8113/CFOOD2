@@ -44,13 +44,18 @@ void Parser::Parse()
 			parseList();
 		}
 
-
+		if (peekChar() == '-')
+		{
+			parseTags();
+		}
 
 		if (peekChar() == '\n')
 		{
 			// eol
 		}
 		advance();
+
+		
 	}
 }
 
@@ -128,6 +133,37 @@ void Parser::parseBulletPoint()
 	pop();
 	parseIngredient();
 }
+
+
+void Parser::parseTags()
+{
+	
+
+	std::vector<std::string> tags; // Vector to store tags
+	std::string tag;
+
+	// Check if we have a tag in the form of:
+	// <tag>
+
+	while (!isalpha(peekChar()))
+	{
+		advance();
+	}
+	pop();
+
+	while (peekChar() != '\n')
+	{
+		advance();
+	}
+
+	tag = pop();
+	tags.push_back(tag);
+
+
+	// Move the collected tags to the recipe's public tags attribute
+	recipe->tags = std::move(tags); // Move the vector to avoid copying
+}
+
 
 void Parser::parseIngredient()
 {
@@ -237,25 +273,7 @@ void Parser::parseList()
 
 }
 
-void Parser::parseTags()
-{
-	advance();
-	std::string tagsLine;
 
-	while (peekChar() != '\n') {
-		advance();
-	}
-	tagsLine = pop();
-
-	std::vector<std::string> tags;
-	size_t start = 0, end = 0;
-	while ((end = tagsLine.find(',', start)) != std::string::npos) {
-		std::string tag = tagsLine.substr(start, end - start);
-		tags.push_back(trim(tagsLine.substr(start)));
-
-		recipe->setTags(tags);
-	}
-}
 
 char Parser::peekChar() {
 	return m_Span.data[m_Span.position + m_Span.span];
