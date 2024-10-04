@@ -49,4 +49,9 @@ build/
 *.dmp
 *.DS_Store
 Thumbs.db
-
+.vs/CFood/v17/Browse.VC.opendb
+.vs/CFOOD2/v17/.wsuo
+.vs/CFOOD2/v17/Browse.VC.db
+.vs/CFood/v17/Browse.VC.db
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
