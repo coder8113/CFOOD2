@@ -54,9 +54,15 @@ public:
 
     std::string filename;           /**< The filename where the recipe is stored. */
     void setFilename(std::string filename);
+    std::string title;
+   // std::string title;              /**< The title of the recipe. */
+    void setTitle(std::string title);   
+   
+    std::vector<std::string> tags;
+    //std::vector<std::string> tags;   /**< The tags of the recipe. */
+    void setTags(std::vector<std::string> tags);
 
-    std::string title;              /**< The title of the recipe. */
-    void setTitle(std::string title);
+    
 
     uint32_t servings;              /**< The number of servings the recipe yields. */
 
@@ -118,4 +124,7 @@ private:
      * @param ingredient The ingredient to be displayed.
      */
     void DisplayIngredient(struct Ingredient ingredient);
+
 };
+
+

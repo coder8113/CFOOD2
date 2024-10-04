@@ -4,21 +4,43 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <string>
+#include <map>
+#include <vector>
 
 #include <Windows.h>
 
 uint32_t Util::search_recipe_list(std::vector<Recipe*>* recipe_list,
 	std::string substring)
 {
+	std::map<std::string, std::vector<std::string>> recipeMap;
+
+	for (Recipe* recipe : *recipe_list) {
+		std::string title = recipe->title;
+		std::vector<std::string> tags = recipe->tags;
+		recipeMap[title] = tags;
+
+	}
 
 	for (uint32_t i = 0; i < recipe_list->size(); i++)
 	{
-		std::string title = toLowerCase(recipe_list->at(i)->title);
+		Recipe* recipe = recipe_list->at(i);
+		std::string title = toLowerCase(recipe ->title);
 
 		if (title.find(substring) != std::string::npos) {
 			return i;
 		}
+
+		for (const std::string& tag : recipe->tags) {
+			std::string lowerTag = toLowerCase(tag);
+			if (lowerTag.find(substring) != std::string::npos) {
+				return i;
+			}
+
+		}
+
 	}
+
 
 	return -1;
 }

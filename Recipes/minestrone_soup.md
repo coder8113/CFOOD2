@@ -1,5 +1,8 @@
 # Minestrone Soup
 
+## Tags 
+- soup
+
 ## Ingredients
 
 * 4 tbsp olive oil

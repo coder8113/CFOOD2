@@ -1,5 +1,9 @@
 # Chickpea Cauliflower Bowl
 
+## Tags 
+- Vegetarian
+- Lunch
+
 ## Ingredients
 
 * Butter bean hummus:

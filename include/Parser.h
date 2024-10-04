@@ -39,6 +39,7 @@ public:
 	enum state_e {
 		INIT_MODE,          ///< Initial state before parsing begins.
 		TITLE_MODE,         ///< Parsing the title of the recipe.
+		TAGS_MODE,          ///< Parsing the tags of the recipe
 		INGREDIENTS_MODE,   ///< Parsing the ingredients of the recipe.
 		INSTRUCTIONS_MODE,  ///< Parsing the instructions of the recipe.
 		REMARKS_MODE,       ///< Parsing the remarks section of the recipe.
@@ -74,6 +75,7 @@ public:
 	std::string INGREDIENTS = "Ingredients"; ///< Constant for ingredients section identifier.
 	std::string INSTRUCTIONS = "Instructions"; ///< Constant for instructions section identifier.
 	std::string REMARKS = "Remarks"; ///< Constant for remarks section identifier.
+	std::string TAGS = "Tags"; ///< Constant for tags section identifier
 
 
 private:
@@ -82,6 +84,14 @@ private:
 	 * @brief Parses the heading of the recipe.
 	 */
 	void parseHeading();
+
+	/**
+	 * @brief Parses the tags of the recipe.
+	 */
+	void parseTags();
+
+	
+
 
 	/**
 	 * @brief Parses bullet points in the recipe.
@@ -120,5 +130,7 @@ private:
 	 * @return std::string The next segment of data.
 	 */
 	std::string pop();
+
+	std::string trim(const std::string& str);
 	
 };

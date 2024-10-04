@@ -1,4 +1,8 @@
-# Vegan Carrot Cake
+# Carrot Cake
+
+## Tags
+- Vegan
+- Dessert
 
 ## Ingredients
 

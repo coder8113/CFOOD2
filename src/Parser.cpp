@@ -1,6 +1,8 @@
 #include "./Parser.h"
 #include <iostream>
 #include <cassert>
+#include <string>
+#include <file.h>
 
 Parser::Parser(std::string data, std::string filename) {
 	m_Span.data = data;
@@ -42,13 +44,18 @@ void Parser::Parse()
 			parseList();
 		}
 
-
+		if (peekChar() == '-')
+		{
+			parseTags();
+		}
 
 		if (peekChar() == '\n')
 		{
 			// eol
 		}
 		advance();
+
+		
 	}
 }
 
@@ -89,6 +96,9 @@ void Parser::parseHeading()
 			m_State = REMARKS_MODE;
 			//printf("<subheading> remarks\n");
 		}
+		if (subheading == TAGS) {
+			m_State = TAGS_MODE;
+		}
 		return;
 
 	}
@@ -123,6 +133,37 @@ void Parser::parseBulletPoint()
 	pop();
 	parseIngredient();
 }
+
+
+void Parser::parseTags()
+{
+	
+
+	std::vector<std::string> tags; // Vector to store tags
+	std::string tag;
+
+	// Check if we have a tag in the form of:
+	// <tag>
+
+	while (!isalpha(peekChar()))
+	{
+		advance();
+	}
+	pop();
+
+	while (peekChar() != '\n')
+	{
+		advance();
+	}
+
+	tag = pop();
+	tags.push_back(tag);
+
+
+	// Move the collected tags to the recipe's public tags attribute
+	recipe->tags = std::move(tags); // Move the vector to avoid copying
+}
+
 
 void Parser::parseIngredient()
 {
@@ -232,6 +273,8 @@ void Parser::parseList()
 
 }
 
+
+
 char Parser::peekChar() {
 	return m_Span.data[m_Span.position + m_Span.span];
 }
@@ -249,6 +292,14 @@ std::string Parser::pop() {
 	m_Span.position += m_Span.span;
 	m_Span.span = 0;
 	return result;
+}
+
+std::string Parser::trim(const std::string& str) {
+	const char* whitespace = "\t\n\r\f\v";
+	size_t start = str.find_first_not_of(whitespace);
+	size_t end = str.find_last_not_of(whitespace);
+
+	return (start == std::string::npos) ? "" : str.substr(start, end - start + 1);
 }
 
 void Parser::unittest() {

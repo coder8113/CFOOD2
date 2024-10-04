@@ -1,5 +1,8 @@
 # Oatmeal Chocolate Chip Cookies
 
+## Tags
+- Dessert
+
 ## Ingredients
 
 * 1 cup all-purpose flour
