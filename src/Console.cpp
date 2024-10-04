@@ -6,7 +6,8 @@ Console::Console()
 	UpdateScreenSize();
 	buffer_size = width * height;
 	buffer = (CHAR_INFO *)malloc(sizeof(CHAR_INFO) * width*height);
-
+	cursor = { 0, 0 };
+	indent = 0;
 	attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 	Clear();
 
@@ -127,7 +128,7 @@ void Console::PutString(std::string s)
 	CHAR* ch = new CHAR[s.size()+1];
 	strcpy_s(ch, sizeof(CHAR) * (s.size() +1), s.c_str());
 	PutChars(ch, s.size());
-	delete ch;
+	//delete ch;
 }
 
 void Console::PutStringLn(std::string s)

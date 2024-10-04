@@ -49,3 +49,4 @@ build/
 *.dmp
 *.DS_Store
 Thumbs.db
+.vs/CFood/v17/Browse.VC.opendb
