@@ -5,7 +5,7 @@
 #include "Menu.h"
 #include "Parser.h"
 #include "Recipe.h"
-
+#include "Console.h"
 
 int main() {
 	Menu::unittest();
@@ -13,6 +13,7 @@ int main() {
 	Recipe::unittest();
 	file::unittest();
 	Util::unittest();
+	Console::unittest();
 	std::cout << "Test Done!";
 	return 0;
 }

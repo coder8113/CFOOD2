@@ -3,16 +3,16 @@
 
 Menu::Menu()
 {
-    console = new Console();
-    console->SetTitle("CFOOD2");
+    Console::Init();
+    Console::SetTitle("CFOOD2");
     DisplaySplash();
 }
 
 void Menu::DisplaySplash()
 {
-    SHORT padding = (console->getWidth() - 74) / 2;
-    console->SetIndent(padding);
-    console->SetAttribute(FOREGROUND_BLUE);
+    SHORT padding = (Console::getWidth() - 74) / 2;
+    Console::SetIndent(padding);
+    Console::SetAttribute(FOREGROUND_BLUE);
     std::string splash =
         "\n"
         " .d8888b.         8888888888 .d88888b.   .d88888b.  8888888b.   .d8888b.\n"
@@ -26,19 +26,19 @@ void Menu::DisplaySplash()
         "\n"
         "                  By Jennifer Puzey and Robert Cresswell                 \n"
         "         Special thanks to Boris Trifkovic for his contributions.        \n";
-    console->PutString(splash);
-    console->Print();
+    Console::PutString(splash);
+    Console::Print();
     Sleep(1500);
-    console->SetIndent(0);
-    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
-    console->Clear();
+    Console::SetIndent(0);
+    Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    Console::Clear();
 }
 
 bool Menu::updateScreenSize()
 {
 
-    cols = console->getWidth();
-    rows = console->getHeight();
+    cols = Console::getWidth();
+    rows = Console::getHeight();
 
 
     return true;
@@ -50,7 +50,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
     if (line.size() < cols)
     {
         printIndent(indent);
-        console->PutStringLn(line);
+        Console::PutStringLn(line);
         return 1;
     }
 
@@ -64,7 +64,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
         if (base_index + span == line.size())
         {
             printIndent(indent);
-            console->PutStringLn(line.substr(base_index, span));
+            Console::PutStringLn(line.substr(base_index, span));
 
             return rows_printed;
         }
@@ -74,7 +74,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
             if (last_white_space_offset != 0)
             {
                 printIndent(indent);
-                console->PutStringLn(line.substr(base_index, last_white_space_offset));
+                Console::PutStringLn(line.substr(base_index, last_white_space_offset));
 
                 base_index += last_white_space_offset;
                 span = 0;
@@ -83,7 +83,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
             else
             {
                 printIndent(indent);
-                console->PutStringLn("-"+line.substr(base_index, span));
+                Console::PutStringLn("-"+line.substr(base_index, span));
 
                 base_index += span;
                 span = 0;
@@ -105,39 +105,39 @@ void Menu::printIndent(uint32_t indent=0)
 {
     for (uint32_t i = 0; i < indent; i++)
     {
-        console->PutChar(' ');
+        Console::PutChar(' ');
     }
 }
 
 
 void Menu::displayMainMenu()
 {
-    console->UpdateScreenSize();
+    Console::UpdateScreenSize();
     updateScreenSize();
-    console->Clear();
-    console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
-    console->PutStringLn("Recipes:");
-    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    Console::Clear();
+    Console::SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
+    Console::PutStringLn("Recipes:");
+    Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
 
     if (substring_to_search.size() == 0)
     {
-        console->PutChar('\n');
+        Console::PutChar('\n');
     }
     else
     {
-        console->PutStringLn("Search: " + substring_to_search);
+        Console::PutStringLn("Search: " + substring_to_search);
     }
-    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
-    console->PutString(std::string(cols, '-'));
+    Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    Console::PutString(std::string(cols, '-'));
 
     uint32_t i = topRow;
     while(i < topRow + rows - LINES_RESERVED && i < recipesList->size())
     {
         if (i == cursor)
         {
-            console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE);
+            Console::SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE);
             printLineLeftJustified("> " + recipesList->at(i)->title, 2);
-            console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+            Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
 
         }
         else 
@@ -146,11 +146,11 @@ void Menu::displayMainMenu()
         }
         i++;
     }
-    console->PutChar('\n');
-    console->SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
-    console->PutStringLn("[UP/DOWN] navigate | [ENTER] select | [ESC] exit");
-    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
-    console->Print();
+    Console::PutChar('\n');
+    Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
+    Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [ESC] exit");
+    Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
+    Console::Print();
 }
 
 void Menu::cursorUp()
@@ -275,7 +275,7 @@ void Menu::recipeMenuCallBack(int vk)
 
 void Menu::displayRecipe()
 {
-    console->Clear();
+    Console::Clear();
     if (!recipeToDisplay)
     {
         return;
@@ -287,7 +287,7 @@ void Menu::displayRecipe()
     {
         printLineLeftJustified(line, 0);
     }
-    console->Print();
+    Console::Print();
 
 }
 

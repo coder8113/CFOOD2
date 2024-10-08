@@ -35,6 +35,7 @@ add_executable(tests
     ${PROJECT_SOURCE_DIR}/src/EventListener.cpp
     ${PROJECT_SOURCE_DIR}/src/Menu.cpp
     ${PROJECT_SOURCE_DIR}/src/Util.cpp
+    
 )
 
 # Add tests

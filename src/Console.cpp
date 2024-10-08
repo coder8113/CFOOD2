@@ -1,6 +1,16 @@
 #include "./Console.h"
 
-Console::Console()
+HANDLE Console::hConsole = nullptr;  
+CONSOLE_SCREEN_BUFFER_INFO Console::buffer_info; 
+size_t Console::buffer_size = 0; 
+CHAR_INFO* Console::buffer = nullptr; 
+COORD Console::cursor = { 0, 0 }; 
+WORD Console::attributes = 0;
+SHORT Console::width = 0; 
+SHORT Console::height = 0; 
+SHORT Console::indent = 0; 
+
+void Console::Init()
 {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	UpdateScreenSize();
@@ -10,16 +20,6 @@ Console::Console()
 	indent = 0;
 	attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 	Clear();
-
-
-}
-
-Console::~Console()
-{
-	free(buffer);
-	// I think this will only run when the application
-	// is exiting so this isn't that important.
-
 }
 
 void Console::UpdateScreenSize()
@@ -85,7 +85,7 @@ void Console::PutChar(CHAR ch)
 		while (cursor.X < width)
 		{
 			buffer[cursor.X + cursor.Y * width].Char.UnicodeChar = ' ';
-			buffer[cursor.X + cursor.Y * width].Attributes = this->attributes;
+			buffer[cursor.X + cursor.Y * width].Attributes = attributes;
 			cursor.X++;
 		}
 		cursor.X = indent;
@@ -95,7 +95,7 @@ void Console::PutChar(CHAR ch)
 	// Check if cursor is within bounds
 	if (cursor.X < width && cursor.Y < height) {
 		buffer[cursor.X + cursor.Y * width].Char.UnicodeChar= ch; // Write character
-		buffer[cursor.X + cursor.Y * width].Attributes = this->attributes;
+		buffer[cursor.X + cursor.Y * width].Attributes = attributes;
 
 		// Move the cursor to the next position
 		cursor.X++;
@@ -154,8 +154,8 @@ void Console::Clear()
 	UpdateScreenSize();
 	for (size_t i = 0; i < buffer_size; i++)
 	{
-		this->buffer[i].Char.UnicodeChar = ' ';
-		this->buffer[i].Attributes = this->attributes;
+		buffer[i].Char.UnicodeChar = ' ';
+		buffer[i].Attributes = attributes;
 
 	}
 
@@ -175,4 +175,60 @@ void Console::SetAttribute(WORD attribute)
 void Console::SetIndent(SHORT i)
 {
 	indent = i;
+}
+
+void Console::unittest() {
+	// Test toLowerCase function
+	std::cout << "Console Tests." << std::endl;
+	height = 100;
+	width = 100;
+	assert(getHeight() == 100);
+	assert(getWidth() == 100);
+	
+	buffer_size = width * height;
+	buffer = (CHAR_INFO*)malloc(sizeof(CHAR_INFO) * width * height);
+	cursor = { 0, 0 };
+	indent = 0;
+	attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
+	SetAttribute(FOREGROUND_BLUE);
+	assert(attributes == FOREGROUND_BLUE);
+
+	SetIndent(0);
+	assert(indent == 0);
+	assert(cursor.X == 0);
+	assert(cursor.Y == 0);
+
+	PutChar('a');
+	assert(buffer[0].Char.UnicodeChar == 'a');
+	assert(buffer[0].Attributes == FOREGROUND_BLUE);
+
+	cursor.X = 0;
+	cursor.Y = 0;
+
+	char test1[5] = "char";
+	PutChars(test1, 4);
+	assert(buffer[0].Char.UnicodeChar == 'c');
+
+	cursor.X = 0;
+	cursor.Y = 0;
+
+	const char test2[6] = "const";
+	PutChars(test2, 5);
+	assert(buffer[0].Char.UnicodeChar == 'c');
+
+	cursor.X = 0;
+	cursor.Y = 0;
+	PutString("test");
+	assert(buffer[0].Char.UnicodeChar == 't');
+
+	cursor.X = 0;
+	cursor.Y = 0;
+
+	PutStringLn("test");
+	assert(buffer[0].Char.UnicodeChar == 't');
+	assert(buffer[4].Char.UnicodeChar == ' ');
+
+	
+	Clear();
+	assert(buffer[0].Char.UnicodeChar == ' ');
 }

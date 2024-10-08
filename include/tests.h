@@ -13,6 +13,7 @@
 #include "Menu.h"
 #include "Parser.h"
 #include "Recipe.h"
+#include "Console.h"
 
 // Function declaration
 int main();
