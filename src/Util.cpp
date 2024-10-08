@@ -76,10 +76,26 @@ std::string Util::toAnsi(std::wstring wstr)
 
 void Util::unittest() {
     // Test toLowerCase function
-    std::string input = "HeLLo WoRLD!";
+	Recipe a = Recipe();
+	Recipe b = Recipe();
+	a.setTitle("aaaa");
+	b.setTitle("bbbb");
+
+	std::vector<Recipe*> list;
+	list.push_back(&a);
+	list.push_back(&b);
+	
+	assert(search_recipe_list(&list, "b") == 1);
+	
+	std::string input = "HeLLo WoRLD!";
     std::string expectedOutput = "hello world!";
     assert(toLowerCase(input) == expectedOutput);
     std::cout << "toLowerCase test passed." << std::endl;
+
+	std::wstring ws = L"a";
+	std::string s = "a";
+
+	assert(toAnsi(ws) == s);
 
     
 }
