@@ -46,13 +46,14 @@ void Console::UpdateScreenSize()
 
 
 	width = buffer_info.srWindow.Right - buffer_info.srWindow.Left;
-	height = buffer_info.srWindow.Bottom - buffer_info.srWindow.Top;
+	height = buffer_info.srWindow.Bottom - buffer_info.srWindow.Top + 1;
 
 	if (width * height > buffer_size)
 	{
-		buffer_size = width * height;
+		buffer_size = (width) * (height);
 		// hopefully this will never fail.
 		// what if we are making the screen smaller? 
+		system("cls");
 		buffer = (CHAR_INFO * )realloc(buffer, sizeof(CHAR_INFO) * buffer_size);
 	}
 
@@ -74,6 +75,11 @@ void Console::Print()
 
 void Console::PutChar(CHAR ch)
 {
+	if (cursor.X >= width && cursor.Y >= height)
+	{
+		return;
+	}
+
 	if (ch == '\n')
 	{
 		while (cursor.X < width)
@@ -146,10 +152,11 @@ void Console::SetCursorPosition(SHORT x, SHORT y)
 void Console::Clear()
 {
 	UpdateScreenSize();
-	for (size_t i = 0; i < width * height; i++)
+	for (size_t i = 0; i < buffer_size; i++)
 	{
 		this->buffer[i].Char.UnicodeChar = ' ';
 		this->buffer[i].Attributes = this->attributes;
+
 	}
 
 	cursor = { indent, 0 };

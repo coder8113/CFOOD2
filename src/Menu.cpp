@@ -36,8 +36,11 @@ void Menu::DisplaySplash()
 
 bool Menu::updateScreenSize()
 {
+
     cols = console->getWidth();
     rows = console->getHeight();
+
+
     return true;
 
 }
@@ -110,9 +113,12 @@ void Menu::printIndent(uint32_t indent=0)
 void Menu::displayMainMenu()
 {
     console->UpdateScreenSize();
+    updateScreenSize();
     console->Clear();
+    console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
+    console->PutStringLn("Recipes:");
+    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
 
-    uint32_t LINES_RESERVED = 4;
     if (substring_to_search.size() == 0)
     {
         console->PutChar('\n');
@@ -121,13 +127,11 @@ void Menu::displayMainMenu()
     {
         console->PutStringLn("Search: " + substring_to_search);
     }
-    console->SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
-    console->PutStringLn("Recipes:");
     console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
-    console->PutChar('\n');
+    console->PutString(std::string(cols, '-'));
 
     uint32_t i = topRow;
-    while(i < topRow + cols - LINES_RESERVED && i < recipesList->size())
+    while(i < topRow + rows - LINES_RESERVED && i < recipesList->size())
     {
         if (i == cursor)
         {
@@ -142,17 +146,54 @@ void Menu::displayMainMenu()
         }
         i++;
     }
+    console->PutChar('\n');
+    console->SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
+    console->PutStringLn("[UP/DOWN] navigate | [ENTER] select | [ESC] exit");
+    console->SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     console->Print();
 }
 
 void Menu::cursorUp()
 {
+    if (cursor == 0)
+    {
+        return;
+    }
     cursor -= cursor != 0 ? 1 : 0;
+    if (cursor == topRow && topRow != 0) {
+        topRow--;
+    }
+
+    checkCursorOffscreen();
 }
 
 void Menu::cursorDown()
 {
+    // case 0: cursor is at bottom and cannot move list down.
+    if (cursor == recipesList->size())
+    {
+        return;
+    }
+
+    // case 1: cursor is not at bottom
     cursor += cursor != recipesList->size() - 1 ? 1 : 0;
+
+    // case 2: cursor is at bottom and can move list down.
+    if (cursor >= (topRow + rows - LINES_RESERVED))
+    {
+        topRow++;
+    }
+
+    checkCursorOffscreen();
+
+}
+
+void Menu::checkCursorOffscreen()
+{
+    if (cursor < topRow || topRow + rows - LINES_RESERVED < cursor)
+    {
+        topRow = cursor;
+    }
 }
 
 void Menu::selectRecipe()

@@ -7,6 +7,8 @@
  */
 #pragma once
 
+#define LINES_RESERVED 5
+
 #include <cstdint>
 #include <windows.h>
 #include <cstdio>
@@ -90,6 +92,8 @@ public:
      * @brief Moves the cursor down in the menu.
      */
     void cursorDown();
+
+    void checkCursorOffscreen();
 
     /**
      * @brief Resets the current search string.
