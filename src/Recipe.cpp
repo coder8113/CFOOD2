@@ -69,7 +69,9 @@ void Recipe::setTags(std::vector<std::string> tags) {
 	this->tags = tags;
 }
 
-
+void Recipe::addTag(std::string tag) {
+	tags.push_back(tag);
+}
 
 void Recipe::addIngredient(uint32_t value, Measurement_e measurement, std::string ingredientName)
 {

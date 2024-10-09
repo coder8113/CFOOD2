@@ -19,7 +19,7 @@ class Recipe
 {
 public:
 	/**
-     * @brief Runs unit tests for the Menu class.
+     * @brief Runs unit tests for the Recipe class.
      */
 	static void unittest();
 	
@@ -58,11 +58,9 @@ public:
    // std::string title;              /**< The title of the recipe. */
     void setTitle(std::string title);   
    
-    std::vector<std::string> tags;
-    //std::vector<std::string> tags;   /**< The tags of the recipe. */
+    std::vector<std::string> tags;    /**< The tags of the recipe. */
     void setTags(std::vector<std::string> tags);
-
-    
+    void addTag(std::string tag);
 
     uint32_t servings;              /**< The number of servings the recipe yields. */
 

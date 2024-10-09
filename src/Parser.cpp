@@ -137,31 +137,37 @@ void Parser::parseBulletPoint()
 
 void Parser::parseTags()
 {
-	
-
-	std::vector<std::string> tags; // Vector to store tags
-	std::string tag;
-
-	// Check if we have a tag in the form of:
-	// <tag>
-
-	while (!isalpha(peekChar()))
+	advance();
+	while (peekChar() == ' ')
 	{
 		advance();
 	}
 	pop();
+	parseTagsHelper();
 
-	while (peekChar() != '\n')
+}
+
+void Parser::parseTagsHelper() 
+{
+	std::vector<std::string> tags; // Vector to store tags
+	std::string tag;
+
+	if (isalpha(peekChar()))
 	{
-		advance();
+		
+		while (isalpha(peekChar()) && peekChar() != '\n')
+		{
+			advance();
+		}
+		tag = pop();
+
 	}
 
-	tag = pop();
-	tags.push_back(tag);
-
-
-	// Move the collected tags to the recipe's public tags attribute
-	recipe->tags = std::move(tags); // Move the vector to avoid copying
+	if (m_State == TAGS_MODE)
+	{
+		recipe->addTag(tag); // Move the vector to avoid copying
+	}
+	
 }
 
 
@@ -306,6 +312,10 @@ void Parser::unittest() {
 	std::cout << "Testing parser" << std::endl;
 	std::string test_data =
 		"# TITLE\n"
+		"## Tags\n"
+		"- vegetarian\n"
+		"- soup\n"
+		"- lunch\n"
 		"## Ingredients\n"
 		"* 200g test\n"
 		"* 1 teaspoon test\n"
@@ -329,7 +339,9 @@ void Parser::unittest() {
 	titleTest.Parse();
 	Recipe* test_recipe = titleTest.getReceipe();
 	assert(test_recipe->title == "TITLE");
-
+	assert(test_recipe->tags.at(0) == "vegetarian");
+	assert(test_recipe->tags.at(1) == "soup");
+	assert(test_recipe->tags.at(2) == "lunch");
 	assert(test_recipe->ingredients.at(0).value = 200);
 	assert(test_recipe->ingredients.at(0).measurement = Recipe::gram);
 	assert(test_recipe->ingredients.at(0).ingredient == "test");

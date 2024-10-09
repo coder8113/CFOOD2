@@ -131,18 +131,18 @@ void Menu::displayMainMenu()
     Console::PutString(std::string(cols, '-'));
 
     uint32_t i = topRow;
-    while(i < topRow + rows - LINES_RESERVED && i < recipesList->size())
+    while(i < topRow + rows - LINES_RESERVED && i < filteredList->size())
     {
         if (i == cursor)
         {
             Console::SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE);
-            printLineLeftJustified("> " + recipesList->at(i)->title, 2);
+            printLineLeftJustified("> " + filteredList->at(i)->title, 2);
             Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
 
         }
         else 
         {
-            printLineLeftJustified(recipesList->at(i)->title, 4);
+            printLineLeftJustified(filteredList->at(i)->title, 4);
         }
         i++;
     }
@@ -205,6 +205,9 @@ void Menu::addLetterToSearch(char c)
 {
     substring_to_search.push_back(c);
     uint32_t index = Util::search_recipe_list(recipesList, substring_to_search);
+    
+    filteredList = Util::filterRecipes(recipesList, substring_to_search);
+    
     if (index == -1)
     {
         return;
@@ -216,6 +219,15 @@ void Menu::addLetterToSearch(char c)
 void Menu::resetSearch()
 {
     substring_to_search.clear();
+    displayMainMenu();
+}
+
+void Menu::resetFilteredList()
+{
+    if (filteredList != nullptr) {
+        delete filteredList;
+    }
+    filteredList = Util::copyRecipeList(recipesList);
 }
 
 void Menu::mainMenuCallBack(int vk)
@@ -241,9 +253,11 @@ void Menu::mainMenuCallBack(int vk)
         selectRecipe();
         EventListener::setCallback(recipe_callback);
         displayRecipe();
+        resetFilteredList();
         break;
     case (VK_BACK):
         resetSearch();
+        resetFilteredList();
         displayMainMenu();
         break;
     default:

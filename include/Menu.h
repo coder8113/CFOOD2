@@ -33,6 +33,9 @@ public:
      */
     static void unittest();
 
+    /**
+     * @brief Displays the splash on start-up.
+     */
     void DisplaySplash();
 
     /**
@@ -43,9 +46,8 @@ public:
     void setRecipeList(std::vector<Recipe*>* recipes)
     {
         recipesList = recipes;
+        filteredList = recipes;
     }
-
-    
 
     /**
      * @brief Displays the main menu of the program.
@@ -93,12 +95,20 @@ public:
      */
     void cursorDown();
 
+    /**
+     * @brief Checks if the cursor is off screen.
+     */
     void checkCursorOffscreen();
 
     /**
      * @brief Resets the current search string.
      */
     void resetSearch();
+
+    /**
+     * @brief Resets the filtered list back to the original recipe list.
+     */
+    void resetFilteredList();
 
     /**
      * @brief Prints a line left-justified with a given indent.
@@ -123,6 +133,7 @@ private:
     std::string substring_to_search;  /**< The search string being used for filtering recipes. */
 
     std::vector<Recipe*>* recipesList; /**< A pointer to the list of recipes available in the menu. */
+    std::vector<Recipe*>* filteredList;
     Recipe* recipeToDisplay = NULL;    /**< The currently selected recipe to display. */
 
     /**

@@ -21,7 +21,7 @@ class Parser
 {
 public:
 	/**
-     * @brief Runs unit tests for the Menu class.
+     * @brief Runs unit tests for the Parser class.
      */
 	static void unittest();
 	/**
@@ -90,8 +90,10 @@ private:
 	 */
 	void parseTags();
 
-	
-
+	/**
+	 * @brief Parse tags helper function.
+	 */
+	void parseTagsHelper();
 
 	/**
 	 * @brief Parses bullet points in the recipe.

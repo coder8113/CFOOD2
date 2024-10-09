@@ -33,7 +33,7 @@ class file
 {
 public:
 	/**
-     * @brief Runs unit tests for the Menu class.
+     * @brief Runs unit tests for the file class.
      */
 	static void unittest();
 	

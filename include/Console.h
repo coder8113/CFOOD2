@@ -33,7 +33,9 @@
 class Console
 {
 public:
-
+	/**
+	 * @brief Runs unit tests for the Console class.
+	 */
 	static void unittest();
 
 	/*!
