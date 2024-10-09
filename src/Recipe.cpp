@@ -2,232 +2,6 @@
 #include <iostream>
 #include <cassert>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;
-
 Recipe::Recipe() 
 {
 	title = "";
@@ -330,10 +104,6 @@ void Recipe::addInstructionAt(std::string instruction, uint32_t position)
 
 }
 
-void Recipe::setInstructionAt(std::string instruction, uint32_t position)
-{
-	return;
-}
 
 void Recipe::setRemarks(std::string remark)
 {
@@ -554,6 +324,27 @@ void Recipe::unittest() {
 	assert(recipe.instructions[1] == "Fry pancetta in olive oil.");
 	assert(recipe.instructions[2] == "Mix spaghetti with pancetta and cheese.");
 	assert(recipe.instructions[3] == "Season with salt and pepper.");
+
+	Recipe test01;
+	test01.setTitle("hi");
+	assert(test01.toString().substr(0, 4) == "# hi");
+	assert(test01.toStringArray().at(0).substr(0, 2) == "hi");
+	assert(measurementToString(kilogram) == "kg");
+	assert(stringToMeasurement("cup") == cup);
+
+	test01.setRemarks("test");
+	assert(test01.remarks == "test");
+
+	test01.addInstructionAt("test", 0);
+	assert(test01.instructions.at(0) == "test");
+
+	std::vector<std::string> testTags;
+	testTags.push_back("test");
+	test01.setTags(testTags);
+	assert(test01.tags.at(0) == "test");
+
+	test01.setFilename("test");
+	assert(test01.filename == "test");
 
 	std::cout << "Instructions test passed." << std::endl;
 }

@@ -72,7 +72,6 @@ public:
     std::vector<std::string> instructions; /**< A vector storing the instructions for the recipe. */
     void addInstruction(std::string instruction);
     void addInstructionAt(std::string instruction, uint32_t position);
-    void setInstructionAt(std::string instruction, uint32_t position);
 
     std::string remarks;            /**< Additional remarks or notes about the recipe. */
     void setRemarks(std::string remark);
