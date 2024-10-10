@@ -148,7 +148,7 @@ void Menu::displayMainMenu()
     }
     Console::PutChar('\n');
     Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
-    Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [ESC] exit");
+    Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [BS] back | [ESC] exit");
     Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     Console::Print();
 }
@@ -226,9 +226,7 @@ void Menu::resetSearch()
 
 void Menu::resetFilteredList()
 {
-    if (filteredList != nullptr) {
-        delete filteredList;
-    }
+
     filteredList = Util::copyRecipeList(recipesList);
 }
 
@@ -278,6 +276,11 @@ void Menu::mainMenuCallBack(int vk)
         resetFilteredList();
         displayMainMenu();
         cursor = 0;  
+    }
+    catch (const std::exception& e) {
+        //resetFilteredList();
+        displayMainMenu();
+        cursor = 0;
     }
     
 }
