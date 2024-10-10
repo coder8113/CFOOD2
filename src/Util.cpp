@@ -101,7 +101,7 @@ std::string Util::toLowerCase(std::string str)
 
 std::string Util::toAnsi(std::wstring wstr) 
 {
-	int RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), wstr.length(), NULL, 0, NULL, NULL);
+	size_t RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), static_cast<int>(wstr.length()), NULL, 0, NULL, NULL);
 
 	if (!RequiredLength)
 	{
@@ -111,7 +111,7 @@ std::string Util::toAnsi(std::wstring wstr)
 
 	std::string str(RequiredLength, '\0');
 
-	RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), wstr.length(), const_cast<char*>(str.data()), str.length(), NULL, NULL);
+	RequiredLength = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, wstr.data(), static_cast<int>(wstr.length()), const_cast<char*>(str.data()), static_cast<int>(str.length()), NULL, NULL);
 
 	if (!RequiredLength)
 	{

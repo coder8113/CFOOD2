@@ -73,7 +73,7 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
             return rows_printed;
         }
 
-        if (span >= cols - 1)
+        if (span >= (uint32_t)cols - 1)
         {
             if (last_white_space_offset != 0)
             {
@@ -135,7 +135,7 @@ void Menu::displayMainMenu()
     Console::PutString(std::string(cols, '-'));
 
     uint32_t i = topRow;
-    while(i < topRow + rows - LINES_RESERVED && i < filteredList->size())
+    while(i < (uint32_t)(topRow + rows - LINES_RESERVED) && i < filteredList->size())
     {
         if (i == cursor)
         {
@@ -271,9 +271,9 @@ void Menu::mainMenuCallBack(int vk)
         case (VK_TAB): 
             if (!filteredList->empty()) {
                
-                auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+                unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
                 std::mt19937 gen(seed);  
-                std::uniform_int_distribution<> dis(0, filteredList->size() - 1); 
+                std::uniform_int_distribution<> dis(0, static_cast<int>(filteredList->size()) - 1);
 
                 try {
                    
