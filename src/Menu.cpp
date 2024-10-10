@@ -170,13 +170,13 @@ void Menu::cursorUp()
 void Menu::cursorDown()
 {
     // case 0: cursor is at bottom and cannot move list down.
-    if (cursor == recipesList->size())
+    if (cursor == filteredList->size())
     {
         return;
     }
 
     // case 1: cursor is not at bottom
-    cursor += cursor != recipesList->size() - 1 ? 1 : 0;
+    cursor += cursor != filteredList->size() - 1 ? 1 : 0;
 
     // case 2: cursor is at bottom and can move list down.
     if (cursor >= (topRow + rows - LINES_RESERVED))
@@ -198,15 +198,17 @@ void Menu::checkCursorOffscreen()
 
 void Menu::selectRecipe()
 {
-    recipeToDisplay = recipesList->at(cursor);
+   
+    recipeToDisplay = filteredList->at(cursor);
+   
 }
 
 void Menu::addLetterToSearch(char c)
 {
     substring_to_search.push_back(c);
-    uint32_t index = Util::search_recipe_list(recipesList, substring_to_search);
+    uint32_t index = Util::search_recipe_list(filteredList, substring_to_search);
     
-    filteredList = Util::filterRecipes(recipesList, substring_to_search);
+    filteredList = Util::filterRecipes(filteredList, substring_to_search);
     
     if (index == -1)
     {
@@ -230,6 +232,8 @@ void Menu::resetFilteredList()
     filteredList = Util::copyRecipeList(recipesList);
 }
 
+
+
 void Menu::mainMenuCallBack(int vk)
 {
     int VK_A = 0x41;
@@ -237,40 +241,49 @@ void Menu::mainMenuCallBack(int vk)
     auto recipe_callback = [this](int value) {
         this->recipeMenuCallBack(value);
     };
-    switch (vk) {
-    case (VK_UP):
-        resetSearch();
-        cursorUp();
-        displayMainMenu();
-        break;
-    case (VK_DOWN):
-        resetSearch();
-        cursorDown();
-        displayMainMenu();
-        break;
-    case (VK_RETURN):
-        resetSearch();
-        selectRecipe();
-        EventListener::setCallback(recipe_callback);
-        displayRecipe();
-        resetFilteredList();
-        break;
-    case (VK_BACK):
-        resetSearch();
-        resetFilteredList();
-        displayMainMenu();
-        break;
-    default:
-        if (VK_A <= vk && vk <= VK_Z)
-        {
-            addLetterToSearch(vk - VK_A + 'a');
+
+    try {
+        switch (vk) {
+        case (VK_UP):
+            resetSearch();
+            cursorUp();
             displayMainMenu();
+            break;
+        case (VK_DOWN):
+            resetSearch();
+            cursorDown();
+            displayMainMenu();
+            break;
+        case (VK_RETURN):
+            resetSearch();
+            selectRecipe();  
+            EventListener::setCallback(recipe_callback);
+            displayRecipe();
+            break;
+        case (VK_BACK):
+            resetSearch();
+            resetFilteredList();
+            displayMainMenu();
+            break;
+        default:
+            if (VK_A <= vk && vk <= VK_Z)
+            {
+                addLetterToSearch(vk - VK_A + 'a');
+                displayMainMenu();
+            }
+            break;
         }
-        break;
-
     }
-
+    catch (const std::out_of_range& e) {
+        resetFilteredList();
+        displayMainMenu();
+        cursor = 0;  
+    }
+    
 }
+
+
+
 
 void Menu::recipeMenuCallBack(int vk)
 {
@@ -301,6 +314,7 @@ void Menu::displayRecipe()
     {
         printLineLeftJustified(line, 0);
     }
+    
     Console::Print();
 
 }

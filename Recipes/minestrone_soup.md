@@ -1,7 +1,8 @@
 # Minestrone Soup
 
 ## Tags 
-- soup
+- Vegetarian
+- Dinner
 
 ## Ingredients
 

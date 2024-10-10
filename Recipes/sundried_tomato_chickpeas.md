@@ -1,7 +1,8 @@
 # Sundried Tomato Chickpeas
 
 ## Tags
-- chickpea
+- Lunch
+- Vegetarian
 
 ## Ingredients
 

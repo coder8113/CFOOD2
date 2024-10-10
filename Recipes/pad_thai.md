@@ -1,7 +1,7 @@
 # Pad Thai
 
 ## Tags
-- test
+- Lunch
 
 ## Ingredients
 

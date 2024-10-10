@@ -1,7 +1,8 @@
 # Dal
 
 ## Tags
-- random
+- Vegetarian
+- Dinner
 
 ## Ingredients
 

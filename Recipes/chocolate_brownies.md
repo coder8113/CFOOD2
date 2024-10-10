@@ -1,7 +1,7 @@
 # Chocolate Brownies
 
 ## Tags
-- random
+- Dessert
 
 ## Ingredients
 
