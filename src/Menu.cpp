@@ -1,5 +1,9 @@
 #include "./Menu.h"
 #include <iostream>
+#include <random>
+#include <chrono>
+
+
 
 Menu::Menu()
 {
@@ -148,7 +152,7 @@ void Menu::displayMainMenu()
     }
     Console::PutChar('\n');
     Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
-    Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [BS] back | [ESC] exit");
+    Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [BS] back | [ESC] exit | [TAB] surprise!");
     Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     Console::Print();
 }
@@ -236,6 +240,7 @@ void Menu::mainMenuCallBack(int vk)
 {
     int VK_A = 0x41;
     int VK_Z = 0x5A;
+    //int VK_S = 0x53;
     auto recipe_callback = [this](int value) {
         this->recipeMenuCallBack(value);
     };
@@ -263,6 +268,39 @@ void Menu::mainMenuCallBack(int vk)
             resetFilteredList();
             displayMainMenu();
             break;
+        case (VK_TAB): 
+            if (!filteredList->empty()) {
+               
+                auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+                std::mt19937 gen(seed);  
+                std::uniform_int_distribution<> dis(0, filteredList->size() - 1); 
+
+                try {
+                   
+                    uint32_t randomIndex = dis(gen);
+                    cursor = randomIndex;  
+                    displayMainMenu();
+                    //selectRecipe();
+                    //EventListener::setCallback(recipe_callback);
+                    //displayRecipe();
+                }
+                catch (const std::exception) {
+             
+                    resetFilteredList();
+                    cursor = 0;
+                    displayMainMenu();
+                }
+            }
+            else {
+              
+                resetFilteredList();
+                cursor = 0;
+                displayMainMenu();
+            }
+            break;
+
+
+
         default:
             if (VK_A <= vk && vk <= VK_Z)
             {
@@ -272,12 +310,12 @@ void Menu::mainMenuCallBack(int vk)
             break;
         }
     }
-    catch (const std::out_of_range& e) {
+    catch (const std::out_of_range) {
         resetFilteredList();
         displayMainMenu();
         cursor = 0;  
     }
-    catch (const std::exception& e) {
+    catch (const std::exception) {
         //resetFilteredList();
         displayMainMenu();
         cursor = 0;
