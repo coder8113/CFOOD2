@@ -119,6 +119,16 @@ public:
      */
     uint32_t printLineLeftJustified(std::string line, uint32_t indent);
 
+    /**
+     * @brief Calculates how many lines will be printed to console
+     * given a string
+     * 
+     * @param line The string to print.
+     * @param indent The number of spaces to indent.
+     * @return The length of the printed line.
+     */
+    uint32_t getLineLength(std::string line, uint32_t indent);
+
 private:
     Console* console;
 
@@ -135,6 +145,8 @@ private:
     std::vector<Recipe*>* recipesList; /**< A pointer to the list of recipes available in the menu. */
     std::vector<Recipe*>* filteredList;
     Recipe* recipeToDisplay = NULL;    /**< The currently selected recipe to display. */
+
+    SHORT recipe_page_on = 0;
 
     /**
      * @brief Prints the specified amount of indentation spaces.

@@ -75,7 +75,7 @@ void Console::Print()
 
 void Console::PutChar(CHAR ch)
 {
-	if (cursor.X >= width && cursor.Y >= height)
+	if (cursor.X >= width - 1 && cursor.Y >= height - 1)
 	{
 		return;
 	}

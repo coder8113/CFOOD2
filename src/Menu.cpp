@@ -105,6 +105,51 @@ uint32_t Menu::printLineLeftJustified(std::string line, uint32_t indent=0)
 
 }
 
+uint32_t Menu::getLineLength(std::string line, uint32_t indent = 0)
+{
+    if (line.size() < cols)
+    {
+        return 1;
+    }
+
+    uint32_t rows_printed = 1;
+    uint32_t base_index = 0;
+    uint32_t span = 0;
+    uint32_t last_white_space_offset = 0;
+
+    while (true)
+    {
+        if (base_index + span == line.size())
+        {
+            return rows_printed;
+        }
+
+        if (span >= (uint32_t)cols - 1)
+        {
+            if (last_white_space_offset != 0)
+            {
+                base_index += last_white_space_offset;
+                span = 0;
+                rows_printed++;
+            }
+            else
+            {
+                base_index += span;
+                span = 0;
+                rows_printed++;
+            }
+        }
+        if (isspace(line.at(base_index + span)))
+        {
+            last_white_space_offset = span;
+        }
+
+        span++;
+    }
+
+
+}
+
 void Menu::printIndent(uint32_t indent=0)
 {
     for (uint32_t i = 0; i < indent; i++)
@@ -152,6 +197,7 @@ void Menu::displayMainMenu()
     }
     Console::PutChar('\n');
     Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
+    Console::SetCursorPosition(0, rows-1);
     Console::PutStringLn("[UP/DOWN] navigate | [ENTER] select | [BS] back | [ESC] exit | [TAB] surprise!");
     Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     Console::Print();
@@ -260,6 +306,7 @@ void Menu::mainMenuCallBack(int vk)
         case (VK_RETURN):
             resetSearch();
             selectRecipe();  
+            recipe_page_on = 0;
             EventListener::setCallback(recipe_callback);
             displayRecipe();
             break;
@@ -307,6 +354,11 @@ void Menu::mainMenuCallBack(int vk)
                 addLetterToSearch(vk - VK_A + 'a');
                 displayMainMenu();
             }
+            else if (vk == VK_SPACE)
+            {
+                addLetterToSearch(' ');
+                displayMainMenu();
+            }
             break;
         }
     }
@@ -338,23 +390,54 @@ void Menu::recipeMenuCallBack(int vk)
         displayMainMenu();
 
     }
+
+    if (vk == VK_LEFT)
+    {
+        recipe_page_on -= (recipe_page_on > 0) ? 1 : 0;
+        displayRecipe();
+    }
+
+    if (vk == VK_RIGHT)
+    {
+        recipe_page_on += 1;
+        displayRecipe();
+    }
     return;
 }
 
 void Menu::displayRecipe()
 {
+    updateScreenSize();
     Console::Clear();
+
     if (!recipeToDisplay)
     {
         return;
     }
 
+    SHORT no_lines_printed = 0;
+    SHORT on_page = 0;
+
     std::vector<std::string> recipe = recipeToDisplay->toStringArray();
 
     for (std::string line : recipe)
     {
-        printLineLeftJustified(line, 0);
+        no_lines_printed += getLineLength(line);
+        if (no_lines_printed + LINES_RESERVED > rows)
+        {
+            on_page += 1;
+            no_lines_printed = 0;
+        }
+        if (on_page == recipe_page_on)
+        {
+            printLineLeftJustified(line, 0);
+        }
     }
+
+    Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
+    Console::SetCursorPosition(0, rows - 1);
+    Console::PutStringLn("[LEFT/RIGHT] navigate | [RETURN] Back | [ESC] exit");
+    Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     
     Console::Print();
 
