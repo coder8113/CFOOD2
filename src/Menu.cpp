@@ -336,9 +336,9 @@ void Menu::mainMenuCallBack(int vk)
                     uint32_t randomIndex = dis(gen);
                     cursor = randomIndex;  
                     displayMainMenu();
-                    //selectRecipe();
-                    //EventListener::setCallback(recipe_callback);
-                    //displayRecipe();
+                    selectRecipe();
+                    EventListener::setCallback(recipe_callback);
+                    displayRecipe();
                 }
                 catch (const std::exception) {
              
