@@ -420,15 +420,17 @@ void Menu::displayRecipe()
 
     std::vector<std::string> recipe = recipeToDisplay->toStringArray();
 
-    for (std::string line : recipe)
+    for (uint32_t i = 0; i < recipe.size(); i++)
     {
+        std::string line = recipe.at(i);
+
         no_lines_printed += getLineLength(line);
         if (no_lines_printed + LINES_RESERVED > rows)
         {
             on_page += 1;
             no_lines_printed = 0;
-        }
-        if (on_page == recipe_page_on)
+            i -= (i > 6) ? 5 : 0;
+        } else if (on_page == recipe_page_on)
         {
             printLineLeftJustified(line, 0);
         }
