@@ -7,6 +7,9 @@
 #include <windows.h>
 #include <iostream>
 #include <functional>
+#include "Console.h"
+
+#define INVALIDATED_DISPLAY 0xE8
 
 /**
  * @brief The EventListener class handles event listening and provides functionality to set

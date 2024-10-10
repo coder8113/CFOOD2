@@ -163,6 +163,12 @@ void Menu::displayMainMenu()
 {
     Console::UpdateScreenSize();
     updateScreenSize();
+
+    if (displayTooSmall())
+    {
+        return;
+    }
+
     Console::Clear();
     Console::SetAttribute(BACKGROUND_BLUE | FOREGROUND_WHITE | FOREGROUND_INTENSITY);
     Console::PutStringLn("Recipes:");
@@ -293,6 +299,9 @@ void Menu::mainMenuCallBack(int vk)
 
     try {
         switch (vk) {
+        case(INVALIDATED_DISPLAY):
+            displayMainMenu();
+            break;
         case (VK_UP):
             resetSearch();
             cursorUp();
@@ -384,6 +393,11 @@ void Menu::recipeMenuCallBack(int vk)
         mainMenuCallBack(value);
     };
 
+    if (vk == INVALIDATED_DISPLAY)
+    {
+        displayRecipe();
+    }
+
     if (vk == VK_BACK)
     {
         EventListener::setCallback(callback);
@@ -410,10 +424,17 @@ void Menu::displayRecipe()
     updateScreenSize();
     Console::Clear();
 
+    if (displayTooSmall())
+    {
+        return;
+    }
+
     if (!recipeToDisplay)
     {
         return;
     }
+
+
 
     SHORT no_lines_printed = 0;
     SHORT on_page = 0;
@@ -438,11 +459,27 @@ void Menu::displayRecipe()
 
     Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
     Console::SetCursorPosition(0, rows - 1);
-    Console::PutStringLn("[LEFT/RIGHT] navigate | [RETURN] Back | [ESC] exit");
+    Console::PutStringLn("[LEFT/RIGHT] navigate | [RETURN] back | [ESC] exit");
     Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     
     Console::Print();
 
+}
+
+bool Menu::displayTooSmall()
+{
+
+    if (cols < 25 || rows < 25)
+    {
+        Console::Clear();
+        if (console->getWidth() * console->getHeight() > 20)
+        {
+            Console::PutStringLn("Display too small!");
+            Console::Print();
+        }
+        return true;
+    }
+    return false;
 }
 
 void Menu::unittest(){

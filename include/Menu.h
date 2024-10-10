@@ -8,6 +8,7 @@
 #pragma once
 
 #define LINES_RESERVED 5
+#define INVALIDATED_DISPLAY 0xE8
 
 #include <cstdint>
 #include <windows.h>
@@ -161,4 +162,6 @@ private:
      * @return True if the screen size was updated, false otherwise.
      */
     bool updateScreenSize();
+
+    bool displayTooSmall();
 };
