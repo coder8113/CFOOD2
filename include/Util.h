@@ -33,14 +33,14 @@ public:
 	 * @param substring to filter by
 	 * @return filtered list
 	 */
-	static std::vector<Recipe*>* Util::filterRecipes(std::vector<Recipe*>* recipe_list, const std::string& search_term);
+	static std::vector<Recipe*>* filterRecipes(std::vector<Recipe*>* recipe_list, const std::string& search_term);
 
 	/**
 	 * @brief Makes a deep copy of the original recipe list
 	 * @param original_list to be copied
 	 * @return copied list
 	 */
-	static std::vector<Recipe*>* Util::copyRecipeList(const std::vector<Recipe*>* original_list);
+	static std::vector<Recipe*>* copyRecipeList(const std::vector<Recipe*>* original_list);
 
 	/**
 	 * @brief Converts all characters in a string to lower-case

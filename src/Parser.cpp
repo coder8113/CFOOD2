@@ -27,6 +27,14 @@ Recipe* Parser::getReceipe()
  */
 void Parser::Parse()
 {
+	if (containsNonAscii())
+	{
+		recipe->setTitle("[error]: " + recipe->filename);
+		recipe->setRemarks("Error! Recipe contains a non ascii character!");
+		return;
+	}
+
+
 	while (m_Span.position + m_Span.span < m_Span.data.length()) {
 		if (peekChar() == '#') 
 		{
@@ -306,6 +314,15 @@ std::string Parser::trim(const std::string& str) {
 	size_t end = str.find_last_not_of(whitespace);
 
 	return (start == std::string::npos) ? "" : str.substr(start, end - start + 1);
+}
+
+bool Parser::containsNonAscii() {
+	for (unsigned char ch : m_Span.data) {
+		if (ch > 127) {
+			return true;  // Non-ASCII character found
+		}
+	}
+	return false;  // All characters are ASCII
 }
 
 void Parser::unittest() {

@@ -80,6 +80,13 @@ public:
 
 private:
 
+
+	/**
+	* @brief Checks if the current instance has a recipe string that
+	* is has a non ascii character;
+	*/
+	bool containsNonAscii();
+
 	/**
 	 * @brief Parses the heading of the recipe.
 	 */

@@ -90,7 +90,7 @@ std::string file::LoadFile(const wchar_t* fileName)
     std::ostringstream oss; // Use ostringstream to build the string
     oss << file.rdbuf(); // Read the file contents into the stringstream
 
-    return oss.str(); // Convert the stringstream to a string
+    return oss.str() + "\n\n\n"; // Convert the stringstream to a string
 }
 
 /*
