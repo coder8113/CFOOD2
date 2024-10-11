@@ -26,4 +26,3 @@ Documentation for this project was produced using doxygen. Our site can be viewe
 ## Authors and acknowledgment
 
 Robert Cresswell and Jennifer Puzey
-a change
