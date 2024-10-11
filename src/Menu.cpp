@@ -459,7 +459,7 @@ void Menu::displayRecipe()
 
     Console::SetAttribute(BACKGROUND_WHITE | FOREGROUND_BLACK);
     Console::SetCursorPosition(0, rows - 1);
-    Console::PutStringLn("[LEFT/RIGHT] navigate | [RETURN] back | [ESC] exit");
+    Console::PutStringLn("[LEFT/RIGHT] navigate | [BACKSPACE] back | [ESC] exit");
     Console::SetAttribute(BACKGROUND_BLACK | FOREGROUND_WHITE);
     
     Console::Print();

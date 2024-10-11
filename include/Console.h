@@ -1,8 +1,6 @@
 /**
 * @file Console.h
-* @brief Console is responsible for interacting with the console api
-* of win32. It handles buffer allocation, reallocation, and writing.
-* 
+* @brief Console is responsible for interacting with the console api.
 * 
 */
 
