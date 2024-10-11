@@ -3,7 +3,7 @@
 void EventListener::MainLoop()
 {
     MSG msg;
-    DWORD lastTime = GetTickCount64();  
+    DWORD lastTime = static_cast<DWORD>(GetTickCount64());  
     const DWORD interval = 150;  
 
     while (true) {
@@ -18,7 +18,7 @@ void EventListener::MainLoop()
         }
 
         // Check the time difference to call the callback every 150 ms
-        DWORD currentTime = GetTickCount64();
+        DWORD currentTime = static_cast<DWORD>(GetTickCount64());
         if (currentTime - lastTime >= interval) {
             callback(INVALIDATED_DISPLAY);  
             lastTime = currentTime;  
